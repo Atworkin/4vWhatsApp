@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.asier_echauri.toolbarasier.R;
+import com.xea.whatsappxea.R;
 
 /**
  * A simple {@link Fragment} subclass.
