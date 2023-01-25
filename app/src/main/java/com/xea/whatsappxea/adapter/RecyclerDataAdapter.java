@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.asier_echauri.toolbarasier.R;
-import com.asier_echauri.toolbarasier.models.Hobby;
+import com.xea.whatsappxea.R;
+import com.xea.whatsappxea.models.Hobby;
 
 import java.util.ArrayList;
 

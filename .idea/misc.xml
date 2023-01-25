@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Asier/AndroidStudioProjects/WhatsAppXEA/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/WhatsAppXEA/app/src/main/res/layout/fragment_add.xml" value="0.25" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/WhatsAppXEA/app/src/main/res/layout/fragment_details.xml" value="0.25" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/WhatsAppXEA/app/src/main/res/layout/fragment_show.xml" value="0.25" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/WhatsAppXEA/app/src/main/res/layout/hobbys_lista.xml" value="0.1" />
       </map>
     </option>
   </component>
