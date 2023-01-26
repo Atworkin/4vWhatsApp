@@ -3,29 +3,26 @@ package com.xea.whatsappxea.models;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Users extends RealmObject {
-    @PrimaryKey
-    private int id;
+public class User  {
+
     private String name;
     private String password;
     private String photo;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(String name, String password) {
+    public User(String name, String password) {
         this.name = name;
         this.password = password;
     }
 
-    public Users(String name, String password, String photo) {
+    public User(String name, String password, String photo) {
         this(name, password);
         this.photo = photo;
     }
 
-    public int getId() {
-        return id;
-    }
+
 
     public String getName() {
         return name;

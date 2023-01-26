@@ -2,7 +2,8 @@ package com.xea.whatsappxea.app;
 
 import android.app.Application;
 
-import com.xea.whatsappxea.models.Hobby;
+import com.xea.whatsappxea.models.Mensaje;
+import com.xea.whatsappxea.models.User;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -13,16 +14,20 @@ import io.realm.RealmResults;
 
 public class MyApplication extends Application {
 
-    public static AtomicInteger hobbyID = new AtomicInteger();
+    //public static AtomicInteger userID = new AtomicInteger();
+    //public static AtomicInteger conversacionID = new AtomicInteger();
+    //public static AtomicInteger mensajeID = new AtomicInteger();
 
     @Override
     public void onCreate(){
         super.onCreate();
 
-        setUpRealmConfig();
-        Realm realm = Realm.getDefaultInstance();
-        hobbyID = getIdByTable(realm, Hobby.class);
-        realm.close();
+        //setUpRealmConfig();
+        //Realm realm = Realm.getDefaultInstance();
+        //userID = getIdByTable(realm, User.class);
+        //conversacionID = getIdByTable(realm, Conversacion.class);
+        //mensajeID = getIdByTable(realm, Mensaje.class);
+        //realm.close();
     }
 
     private void  setUpRealmConfig(){
