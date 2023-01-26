@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "842332134640",
+    "project_id": "vwhatsapp-efec6",
+    "storage_bucket": "vwhatsapp-efec6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842332134640:android:06d8a0c3f1d0b74585b635",
+        "android_client_info": {
+          "package_name": "com.xea.whatsappxea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842332134640-i48r0ppjjvg5b60akdfse7q0p9tjerf9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmjgbSo8zy2xCu0-PMRuoXTf5fZeoBtEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842332134640-i48r0ppjjvg5b60akdfse7q0p9tjerf9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
