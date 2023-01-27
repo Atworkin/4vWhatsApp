@@ -1,4 +1,4 @@
-package com.xea.whatsappxea.activities;
+package com.xea.whatsappxea.adapter.activities;
 
 import android.os.Bundle;
 
