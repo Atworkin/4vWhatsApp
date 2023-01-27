@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomTabIndicator" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">#FFFFFF</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabPaddingStart">0dp</item>
+        <item name="tabPaddingEnd">16dp</item>
+        new tabPaddingStart (0dp - 8dp)
+    </style>
+
+</resources>

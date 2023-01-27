@@ -1,4 +1,4 @@
-package com.xea.whatsappxea.adapter.activities;
+package com.xea.whatsappxea.activities;
 
 import android.os.Bundle;
 
@@ -7,12 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.adapter.MyViewPagerAdapter;
-import com.xea.whatsappxea.models.Hobby;
 import com.google.android.material.tabs.TabLayout;
-import com.xea.whatsappxea.adapter.MyViewPagerAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
