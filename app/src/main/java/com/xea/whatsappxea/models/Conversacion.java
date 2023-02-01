@@ -1,20 +1,23 @@
 package com.xea.whatsappxea.models;
 
 
-public class conversacion {
+import java.util.ArrayList;
+
+public class Conversacion {
 
     private int[] participantes;
     private String nombreC;
+    private ArrayList<Mensaje> mensajes;
 
-    public conversacion() {
+    public Conversacion() {
     }
 
-    public conversacion(int[] participantes) {
+    public Conversacion(int[] participantes) {
         this.participantes = participantes;
         this.nombreC = "";
     }
 
-    public conversacion(int[] participantes, String nombreC) {
+    public Conversacion(int[] participantes, String nombreC) {
         this(participantes);
         this.nombreC = nombreC;
     }
@@ -35,5 +38,21 @@ public class conversacion {
 
     public void setNombreC(String nombreC) {
         this.nombreC = nombreC;
+    }
+
+    public ArrayList<Mensaje> getMensajes() {
+        return mensajes;
+    }
+
+    public void setMensajes(ArrayList<Mensaje> mensajes) {
+        this.mensajes = mensajes;
+    }
+
+    public void addMensajes(Mensaje mensaje) {
+        this.mensajes.add(mensaje);
+    }
+
+    public Mensaje getLastMensajes() {
+        return mensajes.get(mensajes.size()-1);
     }
 }
