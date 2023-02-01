@@ -1,20 +1,20 @@
 package com.xea.whatsappxea.models;
 
 
-public class Conversacion {
+public class conversacion {
 
     private int[] participantes;
     private String nombreC;
 
-    public Conversacion() {
+    public conversacion() {
     }
 
-    public Conversacion(int[] participantes) {
+    public conversacion(int[] participantes) {
         this.participantes = participantes;
         this.nombreC = "";
     }
 
-    public Conversacion(int[] participantes, String nombreC) {
+    public conversacion(int[] participantes, String nombreC) {
         this(participantes);
         this.nombreC = nombreC;
     }

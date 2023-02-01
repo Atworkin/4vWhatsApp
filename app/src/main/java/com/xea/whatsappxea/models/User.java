@@ -1,24 +1,29 @@
 package com.xea.whatsappxea.models;
 
+import com.xea.whatsappxea.R;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class User  {
 
+    private String telNumber;
     private String name;
     private String password;
-    private String photo;
+    private int photo;
 
     public User() {
     }
 
-    public User(String name, String password) {
+    public User(String name, String password,String telNumber) {
+        this.telNumber = telNumber;
         this.name = name;
         this.password = password;
+        this.photo = R.drawable.defaultuser;
     }
 
-    public User(String name, String password, String photo) {
-        this(name, password);
+    public User(String name, String password,String telNumber, int photo) {
+        this(name, password,telNumber);
         this.photo = photo;
     }
 
@@ -40,11 +45,19 @@ public class User  {
         this.password = password;
     }
 
-    public String getPhoto() {
+    public int getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(int photo) {
         this.photo = photo;
+    }
+
+    public String getTelNumber() {
+        return telNumber;
+    }
+
+    public void setTelNumber(String telNumber) {
+        this.telNumber = telNumber;
     }
 }
