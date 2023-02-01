@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    //FirebaseFirestore db;
     TabLayout tabLayout;
     ViewPager viewPager;
     MyViewPagerAdapter myViewPagerAdapter;

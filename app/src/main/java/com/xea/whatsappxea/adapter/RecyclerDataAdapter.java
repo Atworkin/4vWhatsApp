@@ -3,31 +3,36 @@ package com.xea.whatsappxea.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xea.whatsappxea.R;
+import com.xea.whatsappxea.models.Conversacion;
 import com.xea.whatsappxea.models.Hobby;
+import com.xea.whatsappxea.models.User;
 
 import java.util.ArrayList;
 
 public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapter.RecyclerDataHolder> {
 
-    private ArrayList<Hobby> listData;
+    private ArrayList<Conversacion> listData;
     private OnItemClickListener itemListener;
     private int position;
+    private int idUsr;
 
-    public RecyclerDataAdapter(ArrayList<Hobby> listData, OnItemClickListener listener){
+    public RecyclerDataAdapter(ArrayList<Conversacion> listData, int idUsr, ArrayList<User> usuarios, OnItemClickListener listener){
         this.listData = listData;
         this.itemListener = listener;
+        this.idUsr = idUsr;
     }
 
     @NonNull
     @Override
     public RecyclerDataHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hobbys_lista,null, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.conversaciones_lista,null, false);
         return new RecyclerDataHolder(view);
     }
 
@@ -54,22 +59,33 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
 
     public class RecyclerDataHolder extends RecyclerView.ViewHolder{
 
-        TextView tipo;
+        ImageView photo;
         TextView nombre;
-        TextView nota;
+        TextView mesnaje;
 
         public RecyclerDataHolder(@NonNull final View itemView) {
             super(itemView);
-            tipo = (TextView) itemView.findViewById(R.id.tipo);
-            nombre = (TextView) itemView.findViewById(R.id.nombre);
-            nota = (TextView) itemView.findViewById(R.id.nota);
+            photo = (ImageView) itemView.findViewById(R.id.imgPhoto);
+            nombre = (TextView) itemView.findViewById(R.id.txtNombre);
+            mesnaje = (TextView) itemView.findViewById(R.id.txtMensaje);
 
         }
 
-        public void assignData(final Hobby s, final OnItemClickListener onItemClickListener) {
-            tipo.setText(s.getTipo());
-            nombre.setText(s.getTitulo());
-            nota.setText(s.getNota());
+        public void assignData(final Conversacion s, final OnItemClickListener onItemClickListener) {
+           // s.getParticipantes();
+
+            //photo.setImageResource();
+
+            //if(!s.getNombreC().equals("")){
+            //    nombre.setText(s.getNombreC());
+           // }else{
+             //   con
+
+
+
+           // }
+
+            //nota.setText(s.getNota());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,6 +101,6 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
 
 
     public interface OnItemClickListener{
-        void onItemClick(Hobby name);
+        void onItemClick(Conversacion name);
     }
 }
