@@ -2,10 +2,12 @@ package com.xea.whatsappxea.models;
 
 import com.xea.whatsappxea.R;
 
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class User  {
+public class User  implements Serializable {
 
     private String telNumber;
     private String name;

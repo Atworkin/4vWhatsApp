@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">WhatsAppXEA</string>
+    <string name="Nombre" />
+    <string name="registrarse">Registrarse</string>
+    <string name="volver">VOLVER</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="tel_fono">Teléfono</string>
+    <string name="nombre">Nombre</string>
 </resources>
