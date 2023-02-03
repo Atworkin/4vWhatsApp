@@ -1,6 +1,8 @@
 package com.xea.whatsappxea.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -8,8 +10,10 @@ import androidx.viewpager.widget.ViewPager;
 import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.adapter.MyViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
+import com.xea.whatsappxea.models.User;
 
 public class MainActivity extends AppCompatActivity {
+
 
     //FirebaseFirestore db;
     TabLayout tabLayout;
@@ -20,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bundle bundle = getIntent().getExtras();
+        User userLogged = (User) bundle.getSerializable("userLogged");
+        Toast.makeText(MainActivity.this,userLogged.getName(),Toast.LENGTH_SHORT).show();
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("SHOW"));

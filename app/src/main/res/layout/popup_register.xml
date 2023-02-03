@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="500dp"
+    android:background="@drawable/register_bg"
+    android:layout_gravity="center">
+
+    <Button
+        android:id="@+id/btnVolverPopup"
+        android:layout_width="142dp"
+        android:layout_height="47dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="398dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="55dp"
+        android:text="@string/volver"
+        android:textAlignment="center"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:layout_width="74dp"
+        android:layout_height="19dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="210dp"
+        android:layout_marginEnd="269dp"
+        android:layout_marginBottom="272dp"
+        android:text="@string/contrase_a"
+        android:textColor="#FFFFFF"
+        app:layout_constraintVertical_bias="0.384"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="101dp"
+        android:layout_marginEnd="288dp"
+        android:layout_marginBottom="380dp"
+        android:text="@string/nombre"
+        android:textColor="#FFFFFF"
+        app:layout_constraintVertical_bias="0.384" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="153dp"
+        android:layout_marginEnd="288dp"
+        android:layout_marginBottom="328dp"
+        android:text="@string/tel_fono"
+        android:textColor="#FFFFFF"
+        app:layout_constraintVertical_bias="0.384"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btnRegisterPopup"
+        android:layout_width="142dp"
+        android:layout_height="47dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="332dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="121dp"
+        android:text="@string/registrarse"
+        android:textAlignment="center"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txtNombrePopup"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="365dp"
+        android:ems="10"
+        android:hint="@string/Nombre"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/txtPassPopup"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="194dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="256dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        tools:ignore="SpeakableTextPresentCheck"
+        />
+
+    <EditText
+        android:id="@+id/txtTelfPopup"
+        android:layout_width="230dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="139dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="315dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+</RelativeLayout>
