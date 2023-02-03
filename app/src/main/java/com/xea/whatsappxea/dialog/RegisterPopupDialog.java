@@ -19,7 +19,7 @@ public class RegisterPopupDialog extends Dialog {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.popup_register);
             getWindow().setBackgroundDrawableResource(R.drawable.rounded_shape_popup);
-            getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         }
     }
 
