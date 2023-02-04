@@ -22,23 +22,23 @@ import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.dialog.RegisterPopupDialog;
 import com.xea.whatsappxea.models.User;
 
-import org.checkerframework.common.returnsreceiver.qual.This;
-
-import java.io.Serializable;
-
 public class LoginActivity extends AppCompatActivity {
 
     Button btnRegister,btnAcceder,btnVolverPopup,btnRegisterPopup;
     RegisterPopupDialog dialogRegister;
     FirebaseFirestore db;
     EditText txtNompreRegister,txtTelefonoRegister,txtPasswordRegister,txtTelefono,txtPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         db = FirebaseFirestore.getInstance();
 
+        txtTelefono = (EditText)findViewById(R.id.txtTelefonoLogin);
+        txtPassword = (EditText)findViewById(R.id.txtPasswordLogin);
 
         btnRegister = (Button)findViewById(R.id.btnRegistrarse);
         btnAcceder = (Button)findViewById(R.id.btnAcceder);
@@ -68,15 +68,15 @@ public class LoginActivity extends AppCompatActivity {
                         User newUser = new User(nombre,password,telefono);
 
                         CollectionReference usersTable = db.collection("users");
-                        DocumentReference field = usersTable.document(newUser.getTelNumber());
+                        DocumentReference row = usersTable.document(newUser.getTelNumber());
 
-                        field.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        row.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()) {
                                     DocumentSnapshot document = task.getResult();
                                     if (!document.exists()) {
-                                        field.set(newUser)
+                                        row.set(newUser)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
@@ -113,13 +113,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                txtTelefono = (EditText)findViewById(R.id.txtTelefonoLogin);
-                txtPassword = (EditText)findViewById(R.id.txtPasswordLogin);
                 String tel = txtTelefono.getText().toString();
                 String pass = txtPassword.getText().toString();
                 if(!tel.equals("") && !pass.equals("")) {
-                    DocumentReference field = db.collection("users").document(tel);
-                    field.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    DocumentReference row = db.collection("users").document(tel);
+                    row.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
