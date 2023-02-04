@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this,"Numero de teléfono sin registrar",Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(LoginActivity.this,"Error de conextion con la base de datos",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this,"Error de conexión con la base de datos",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
