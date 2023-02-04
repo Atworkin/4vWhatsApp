@@ -63,8 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                         String telefono = txtTelefonoRegister.getText().toString();
                         String password = txtPasswordRegister.getText().toString();
 
-
-
                         User newUser = new User(nombre,password,telefono);
 
                         CollectionReference usersTable = db.collection("users");
@@ -98,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
+
                     }
                 });
                 btnVolverPopup.setOnClickListener(new View.OnClickListener() {
