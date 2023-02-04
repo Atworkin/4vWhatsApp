@@ -118,8 +118,8 @@ public class LoginActivity extends AppCompatActivity {
                 String tel = txtTelefono.getText().toString();
                 String pass = txtPassword.getText().toString();
                 if(!tel.equals("") && !pass.equals("")) {
-                    DocumentReference docRef = db.collection("users").document(tel);
-                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    DocumentReference field = db.collection("users").document(tel);
+                    field.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
