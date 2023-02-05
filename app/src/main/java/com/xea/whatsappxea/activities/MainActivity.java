@@ -19,14 +19,14 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     MyViewPagerAdapter myViewPagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Bundle bundle = getIntent().getExtras();
-        User userLogged = (User) bundle.getSerializable("userLogged");
-        Toast.makeText(MainActivity.this,userLogged.getName(),Toast.LENGTH_SHORT).show();
+        User userLogged = (User) getIntent().getSerializableExtra("userLogged");
+        Toast.makeText(MainActivity.this, userLogged.getName(), Toast.LENGTH_SHORT).show();
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("SHOW"));
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("ADD"));
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-       
 
     }
 }
