@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.models.Conversacion;
-import com.xea.whatsappxea.models.Hobby;
 import com.xea.whatsappxea.models.User;
 
 import java.util.ArrayList;
