@@ -22,26 +22,26 @@ import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.dialog.RegisterPopupDialog;
 import com.xea.whatsappxea.models.User;
 
-import org.checkerframework.common.returnsreceiver.qual.This;
-
-import java.io.Serializable;
-
 public class LoginActivity extends AppCompatActivity {
 
-    Button btnRegister,btnAcceder,btnVolverPopup,btnRegisterPopup;
+    Button btnRegister, btnAcceder, btnVolverPopup, btnRegisterPopup;
     RegisterPopupDialog dialogRegister;
     FirebaseFirestore db;
-    EditText txtNompreRegister,txtTelefonoRegister,txtPasswordRegister,txtTelefono,txtPassword;
+    EditText txtNompreRegister, txtTelefonoRegister, txtPasswordRegister, txtTelefono, txtPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         db = FirebaseFirestore.getInstance();
 
+        txtTelefono = (EditText) findViewById(R.id.txtTelefonoLogin);
+        txtPassword = (EditText) findViewById(R.id.txtPasswordLogin);
 
-        btnRegister = (Button)findViewById(R.id.btnRegistrarse);
-        btnAcceder = (Button)findViewById(R.id.btnAcceder);
+        btnRegister = (Button) findViewById(R.id.btnRegistrarse);
+        btnAcceder = (Button) findViewById(R.id.btnAcceder);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,10 +49,10 @@ public class LoginActivity extends AppCompatActivity {
                 dialogRegister = new RegisterPopupDialog(LoginActivity.this);
                 dialogRegister.show();
 
-                txtNompreRegister = (EditText)dialogRegister.getWindow().findViewById(R.id.txtNombrePopup);
-                txtTelefonoRegister = (EditText)dialogRegister.getWindow().findViewById(R.id.txtTelfPopup);
-                txtPasswordRegister = (EditText)dialogRegister.getWindow().findViewById(R.id.txtPassPopup);
-                btnRegisterPopup = (Button)dialogRegister.getWindow().findViewById(R.id.btnRegisterPopup);
+                txtNompreRegister = (EditText) dialogRegister.getWindow().findViewById(R.id.txtNombrePopup);
+                txtTelefonoRegister = (EditText) dialogRegister.getWindow().findViewById(R.id.txtTelfPopup);
+                txtPasswordRegister = (EditText) dialogRegister.getWindow().findViewById(R.id.txtPassPopup);
+                btnRegisterPopup = (Button) dialogRegister.getWindow().findViewById(R.id.btnRegisterPopup);
                 btnVolverPopup = (Button) dialogRegister.getWindow().findViewById(R.id.btnVolverPopup);
 
                 btnRegisterPopup.setOnClickListener(new View.OnClickListener() {
@@ -63,42 +63,44 @@ public class LoginActivity extends AppCompatActivity {
                         String telefono = txtTelefonoRegister.getText().toString();
                         String password = txtPasswordRegister.getText().toString();
 
-
-
-                        User newUser = new User(nombre,password,telefono);
-
+                        User newUser = new User(nombre, password, telefono);
+                        if (nombre.isEmpty() || telefono.isEmpty() || password.isEmpty()) {
+                            Toast.makeText(LoginActivity.this, "Por favor ingrese su número de teléfono y contraseña", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         CollectionReference usersTable = db.collection("users");
-                        DocumentReference field = usersTable.document(newUser.getTelNumber());
+                        DocumentReference row = usersTable.document(newUser.getTelNumber());
 
-                        field.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        row.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()) {
                                     DocumentSnapshot document = task.getResult();
                                     if (!document.exists()) {
-                                        field.set(newUser)
+                                        row.set(newUser)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
-                                                        Toast.makeText(LoginActivity.this,"Te has registrado correctamente",Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(LoginActivity.this, "Te has registrado correctamente", Toast.LENGTH_SHORT).show();
                                                         dialogRegister.dismiss();
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(LoginActivity.this,"Error al intentar registrarte",Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(LoginActivity.this, "Error al intentar registrarte", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
                                     } else {
-                                        Toast.makeText(LoginActivity.this,"El número de teléfono ya esta en uso",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "El número de teléfono ya esta en uso", Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
-                                    Toast.makeText(LoginActivity.this,"Error de conexión",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
                     }
+
                 });
                 btnVolverPopup.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -112,43 +114,39 @@ public class LoginActivity extends AppCompatActivity {
         btnAcceder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                txtTelefono = (EditText)findViewById(R.id.txtTelefonoLogin);
-                txtPassword = (EditText)findViewById(R.id.txtPasswordLogin);
                 String tel = txtTelefono.getText().toString();
                 String pass = txtPassword.getText().toString();
-                if(!tel.equals("") && !pass.equals("")) {
-                    DocumentReference docRef = db.collection("users").document(tel);
-                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document.exists()) {
-                                    String storedPassword = (String) document.get("password");
-                                    if (storedPassword.equals(pass)) {
-                                        User userLogged = document.toObject(User.class);
-                                        Bundle bundle = new Bundle();
-                                        bundle.putSerializable("userLogged", userLogged);
-                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                        intent.putExtras(bundle);
-                                        startActivity(intent);
-
-                                    } else {
-                                        Toast.makeText(LoginActivity.this,"Contraseña incorrecta",Toast.LENGTH_SHORT).show();
-                                    }
-
-                                } else {
-                                    Toast.makeText(LoginActivity.this,"Numero de teléfono sin registrar",Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Toast.makeText(LoginActivity.this,"Error de conextion con la base de datos",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+                if (tel.isEmpty() || pass.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Por favor ingrese su número de teléfono y contraseña", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                DocumentReference row = db.collection("users").document(tel);
+                row.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                String storedPassword = document.getString("password");
+                                if (storedPassword.equals(pass)) {
+                                    User userLogged = document.toObject(User.class);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.putExtra("userLogged", userLogged);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
+                                }
 
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Numero de teléfono sin registrar", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Error de conexión con la base de datos", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
+
         });
     }
 }
