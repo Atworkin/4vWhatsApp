@@ -1,38 +1,36 @@
 package com.xea.whatsappxea.models;
 
 
-public class Mensaje  {
+import com.xea.whatsappxea.app.MyApplication;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
+public class Mensaje extends RealmObject {
 
-    private int idConversacion;
-    private int idRemitente;
+    @PrimaryKey
+    private int id;
+
+    private String idRemitente;
     private String contenido;
 
     public Mensaje() {
     }
 
-    public Mensaje(int idConversacion, int idRemitente, String contenido) {
-        this.idConversacion = idConversacion;
+    public Mensaje(String idRemitente, String contenido) {
+        this.id = MyApplication.mensajeID.incrementAndGet() ;
         this.idRemitente = idRemitente;
         this.contenido = contenido;
     }
 
 
 
-    public int getIdConversacion() {
-        return idConversacion;
-    }
 
-    public void setIdConversacion(int idConversacion) {
-        this.idConversacion = idConversacion;
-    }
-
-    public int getIdRemitente() {
+    public String getIdRemitente() {
         return idRemitente;
     }
 
-    public void setIdRemitente(int idRemitente) {
+    public void setIdRemitente(String idRemitente) {
         this.idRemitente = idRemitente;
     }
 
