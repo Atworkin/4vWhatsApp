@@ -22,6 +22,7 @@ import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.dialog.RegisterPopupDialog;
 import com.xea.whatsappxea.models.User;
 
+
 public class LoginActivity extends AppCompatActivity {
 
     Button btnRegister, btnAcceder, btnVolverPopup, btnRegisterPopup;
