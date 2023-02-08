@@ -1,34 +1,44 @@
 package com.xea.whatsappxea.models;
 
 
+import com.xea.whatsappxea.app.MyApplication;
+
 import java.util.ArrayList;
 
-public class Conversacion {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-    private int[] participantes;
+public class Conversacion extends RealmObject {
+
+    @PrimaryKey
+    private int id;
+
+    private String[] participantes;
     private String nombreC;
     private ArrayList<Mensaje> mensajes;
 
     public Conversacion() {
     }
 
-    public Conversacion(int[] participantes) {
+    public Conversacion(String[] participantes) {
+        this.id = MyApplication.conversacionID.incrementAndGet() ;
+        this.mensajes = new ArrayList<Mensaje>();
         this.participantes = participantes;
         this.nombreC = "";
     }
 
-    public Conversacion(int[] participantes, String nombreC) {
+    public Conversacion(String[] participantes, String nombreC) {
         this(participantes);
         this.nombreC = nombreC;
     }
 
 
 
-    public int[] getParticipantes() {
+    public String[] getParticipantes() {
         return participantes;
     }
 
-    public void setParticipantes(int[] participantes) {
+    public void setParticipantes(String[] participantes) {
         this.participantes = participantes;
     }
 
@@ -53,6 +63,10 @@ public class Conversacion {
     }
 
     public Mensaje getLastMensajes() {
-        return mensajes.get(mensajes.size()-1);
+        if (this.mensajes.isEmpty()){
+            return new Mensaje("","");
+        }else {
+            return mensajes.get(mensajes.size() - 1);
+        }
     }
 }
