@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -21,6 +23,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.dialog.RegisterPopupDialog;
 import com.xea.whatsappxea.models.User;
+
+import java.io.FileInputStream;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         db = FirebaseFirestore.getInstance();
 

@@ -29,14 +29,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
-            android:text="Mi estado" />
+            android:text="Mi Crea enlace de llamada" />
 
         <TextView
             android:id="@+id/txtMensaje"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="Añade una actualización" />
+            android:text="Comparte un enlace pata tu llamada de WhatsApp" />
     </LinearLayout>
 
 

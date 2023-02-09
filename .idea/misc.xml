@@ -5,16 +5,21 @@
       <map>
         <entry key="..\:/Users/Asier/AndroidStudioProjects/WhatsAppXEA/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Asier/AndroidStudioProjects/WhatsAppXEA/app/src/main/res/layout/hobbys_lista.xml" value="0.25" />
+        <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.2075" />
+        <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2075" />
+        <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/drawable/register_bg.xml" value="0.167" />
         <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/conversaciones_lista.xml" value="0.2" />
-        <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/estado.xml" value="0.22" />
+        <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/estado.xml" value="0.33" />
         <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/fragment_add.xml" value="0.5" />
         <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/fragment_details.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/fragment_show.xml" value="0.2" />
         <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/hobbys_lista.xml" value="0.25" />
-        <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/llamadas.xml" value="0.19895833333333332" />
+        <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/llamadas.xml" value="0.25" />
         <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/login.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/popup_register.xml" value="0.25" />
       </map>
     </option>
   </component>
