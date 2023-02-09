@@ -5,6 +5,7 @@ import com.xea.whatsappxea.app.MyApplication;
 
 import java.util.ArrayList;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -13,32 +14,32 @@ public class Conversacion extends RealmObject {
     @PrimaryKey
     private int id;
 
-    private String[] participantes;
+    private RealmList<String> participantes;
     private String nombreC;
-    private ArrayList<Mensaje> mensajes;
+    private RealmList<Mensaje> mensajes;
 
     public Conversacion() {
     }
 
-    public Conversacion(String[] participantes) {
+    public Conversacion(RealmList<String> participantes) {
         this.id = MyApplication.conversacionID.incrementAndGet() ;
-        this.mensajes = new ArrayList<Mensaje>();
+        this.mensajes = new RealmList<Mensaje>();
         this.participantes = participantes;
         this.nombreC = "";
     }
 
-    public Conversacion(String[] participantes, String nombreC) {
+    public Conversacion(RealmList<String> participantes, String nombreC) {
         this(participantes);
         this.nombreC = nombreC;
     }
 
 
 
-    public String[] getParticipantes() {
+    public RealmList<String> getParticipantes() {
         return participantes;
     }
 
-    public void setParticipantes(String[] participantes) {
+    public void setParticipantes(RealmList<String> participantes) {
         this.participantes = participantes;
     }
 
@@ -50,11 +51,11 @@ public class Conversacion extends RealmObject {
         this.nombreC = nombreC;
     }
 
-    public ArrayList<Mensaje> getMensajes() {
+    public RealmList<Mensaje> getMensajes() {
         return mensajes;
     }
 
-    public void setMensajes(ArrayList<Mensaje> mensajes) {
+    public void setMensajes(RealmList<Mensaje> mensajes) {
         this.mensajes = mensajes;
     }
 
@@ -62,7 +63,7 @@ public class Conversacion extends RealmObject {
         this.mensajes.add(mensaje);
     }
 
-    public Mensaje getLastMensajes() {
+    public Mensaje getLastMensaje() {
         if (this.mensajes.isEmpty()){
             return new Mensaje("","");
         }else {
