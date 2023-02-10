@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item app:showAsAction="always"
+        android:icon="@drawable/backgroundpopup"
+        android:title="more">
+        <menu>
+            <item
+                android:id="@+id/android"
+                android:icon="@drawable/backgroundpopup"
+                android:title="android"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/Profile"
+                android:icon="@drawable/backgroundpopup"
+                android:title="Profile"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/Dowload"
+                android:icon="@drawable/backgroundpopup"
+                android:title="Dowload"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/Setting"
+                android:icon="@drawable/backgroundpopup"
+                android:title="Setting"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/Exit"
+                android:icon="@drawable/backgroundpopup"
+                android:title="Exit"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/Bluetooth"
+                android:icon="@drawable/backgroundpopup"
+                android:title="bluetooth"
+                android:enabled="false"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/Flash"
+                android:icon="@drawable/backgroundpopup"
+                android:title="flash"
+                android:visible="true"
+                app:showAsAction="never">
+                <menu>
+                    <item
+                        android:id="@+id/Fingerprint"
+                        android:icon="@drawable/backgroundpopup"
+                        android:title="fingerprint"
+                        app:showAsAction="never"/>
+                    <item
+                        android:id="@+id/Nube"
+                        android:icon="@drawable/backgroundpopup"
+                        android:title="nube"
+                        app:showAsAction="never"/>
+                </menu>
+            </item>
+
+        </menu>
+
+    </item>
+</menu>
