@@ -3,6 +3,7 @@ package com.xea.whatsappxea.models;
 import com.xea.whatsappxea.R;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -61,5 +62,18 @@ public class User  implements Serializable {
 
     public void setTelNumber(String telNumber) {
         this.telNumber = telNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return telNumber.equals(user.telNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(telNumber);
     }
 }

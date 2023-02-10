@@ -14,32 +14,46 @@ public class Conversacion extends RealmObject {
     @PrimaryKey
     private int id;
 
-    private RealmList<String> participantes;
+    private RealmList<User> participantes;
     private String nombreC;
     private RealmList<Mensaje> mensajes;
+    private int photo;
 
     public Conversacion() {
     }
 
-    public Conversacion(RealmList<String> participantes) {
+    public Conversacion(RealmList<User> participantes) {
         this.id = MyApplication.conversacionID.incrementAndGet() ;
         this.mensajes = new RealmList<Mensaje>();
         this.participantes = participantes;
         this.nombreC = "";
+        this.photo = 0;
     }
 
-    public Conversacion(RealmList<String> participantes, String nombreC) {
+    public Conversacion(RealmList<User> participantes, String nombreC,int photo) {
         this(participantes);
         this.nombreC = nombreC;
+        this.photo = photo;
+    }
+
+    public int getId() {
+        return id;
     }
 
 
+    public int getPhoto() {
+        return photo;
+    }
 
-    public RealmList<String> getParticipantes() {
+    public void setPhoto(int photo) {
+        this.photo = photo;
+    }
+
+    public RealmList<User> getParticipantes() {
         return participantes;
     }
 
-    public void setParticipantes(RealmList<String> participantes) {
+    public void setParticipantes(RealmList<User> participantes) {
         this.participantes = participantes;
     }
 
@@ -70,4 +84,6 @@ public class Conversacion extends RealmObject {
             return mensajes.get(mensajes.size() - 1);
         }
     }
+
+
 }

@@ -24,7 +24,9 @@ public class Mensaje extends RealmObject {
     }
 
 
-
+    public int getId() {
+        return id;
+    }
 
     public String getIdRemitente() {
         return idRemitente;
