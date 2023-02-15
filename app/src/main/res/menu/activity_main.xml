@@ -6,55 +6,27 @@
         android:title="more">
         <menu>
             <item
-                android:id="@+id/android"
-                android:icon="@drawable/backgroundpopup"
-                android:title="android"
+                android:id="@+id/nuevogrupo"
+                android:title="Nuevo Grupo"
                 app:showAsAction="never"/>
             <item
-                android:id="@+id/Profile"
-                android:icon="@drawable/backgroundpopup"
-                android:title="Profile"
+                android:id="@+id/nuevadifusion"
+                android:title="Nueva difusion"
                 app:showAsAction="never"/>
             <item
-                android:id="@+id/Dowload"
-                android:icon="@drawable/backgroundpopup"
-                android:title="Dowload"
+                android:id="@+id/dispositivosvinculados"
+                android:title="Dispositivos vinculados"
                 app:showAsAction="never"/>
             <item
-                android:id="@+id/Setting"
-                android:icon="@drawable/backgroundpopup"
-                android:title="Setting"
+                android:id="@+id/mensajesdestacados"
+                android:title="Mensajes destacados"
                 app:showAsAction="never"/>
             <item
-                android:id="@+id/Exit"
-                android:icon="@drawable/backgroundpopup"
-                android:title="Exit"
+                android:id="@+id/salir"
+                android:title="Salir"
                 app:showAsAction="never"/>
-            <item
-                android:id="@+id/Bluetooth"
-                android:icon="@drawable/backgroundpopup"
-                android:title="bluetooth"
-                android:enabled="false"
-                app:showAsAction="never"/>
-            <item
-                android:id="@+id/Flash"
-                android:icon="@drawable/backgroundpopup"
-                android:title="flash"
-                android:visible="true"
-                app:showAsAction="never">
-                <menu>
-                    <item
-                        android:id="@+id/Fingerprint"
-                        android:icon="@drawable/backgroundpopup"
-                        android:title="fingerprint"
-                        app:showAsAction="never"/>
-                    <item
-                        android:id="@+id/Nube"
-                        android:icon="@drawable/backgroundpopup"
-                        android:title="nube"
-                        app:showAsAction="never"/>
-                </menu>
-            </item>
+
+
 
         </menu>
 
