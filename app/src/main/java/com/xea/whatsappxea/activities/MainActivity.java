@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     MyViewPagerAdapter myViewPagerAdapter;
+    androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +27,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         User userLogged = (User) getIntent().getSerializableExtra("userLogged");
-        Toast.makeText(MainActivity.this, userLogged.getName(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, userLogged.getName(), Toast.LENGTH_SHORT).show();
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("SHOW"));
         tabLayout.addTab(tabLayout.newTab().setText("DETAILS"));
         tabLayout.addTab(tabLayout.newTab().setText("ADD"));
-
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(myViewPagerAdapter);
