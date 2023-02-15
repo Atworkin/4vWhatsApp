@@ -25,9 +25,11 @@ import com.xea.whatsappxea.models.User;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.realm.Realm;
+
 
 public class LoginActivity extends AppCompatActivity {
-
+    Realm realm;
     Button btnRegister, btnAcceder, btnVolverPopup, btnRegisterPopup;
     RegisterPopupDialog dialogRegister;
     FirebaseFirestore db;
@@ -38,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        realm = Realm.getDefaultInstance();
 
         db = FirebaseFirestore.getInstance();
 
@@ -90,6 +93,10 @@ public class LoginActivity extends AppCompatActivity {
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
+
+                                                        realm.beginTransaction();
+                                                        realm.copyToRealm(new User(user.get("name").toString(),user.get("password").toString(),user.get("telNumber").toString()));
+                                                        realm.commitTransaction();
                                                         Toast.makeText(LoginActivity.this, "Te has registrado correctamente", Toast.LENGTH_SHORT).show();
                                                         dialogRegister.dismiss();
                                                     }
