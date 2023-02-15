@@ -20,12 +20,12 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
     private ArrayList<Conversacion> listData;
     private OnItemClickListener itemListener;
     private int position;
-    private int idUsr;
+    private String telEmisor;
 
-    public RecyclerDataAdapter(ArrayList<Conversacion> listData, int idUsr, ArrayList<User> usuarios, OnItemClickListener listener){
+    public RecyclerDataAdapter(ArrayList<Conversacion> listData, String telEmisor, OnItemClickListener listener){
         this.listData = listData;
         this.itemListener = listener;
-        this.idUsr = idUsr;
+        this.telEmisor = telEmisor;
     }
 
     @NonNull
@@ -60,13 +60,13 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
 
         ImageView photo;
         TextView nombre;
-        TextView mesnaje;
+        TextView mensaje;
 
         public RecyclerDataHolder(@NonNull final View itemView) {
             super(itemView);
             photo = (ImageView) itemView.findViewById(R.id.imgPhoto);
             nombre = (TextView) itemView.findViewById(R.id.txtNombre);
-            mesnaje = (TextView) itemView.findViewById(R.id.txtMensaje);
+            mensaje = (TextView) itemView.findViewById(R.id.txtMensaje);
 
         }
 
@@ -75,16 +75,21 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
 
             //photo.setImageResource();
 
-            //if(!s.getNombreC().equals("")){
-            //    nombre.setText(s.getNombreC());
-           // }else{
-             //   con
+
+            if(!s.getNombreC().equals("")){
+                nombre.setText(s.getNombreC());
+                photo.setImageResource(s.getPhoto());
+            }else{
+               for (User u : s.getParticipantes()){
+                   if(!u.equals(new User("","",telEmisor))){
+                       nombre.setText(u.getName());
+                       photo.setImageResource(u.getPhoto());
+                   }
+               }
 
 
-
-           // }
-
-            //nota.setText(s.getNota());
+            }
+            mensaje.setText(s.getLastMensaje().getContenido());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
