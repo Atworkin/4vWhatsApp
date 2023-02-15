@@ -8,9 +8,11 @@ import java.util.Objects;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class User  implements Serializable {
+public class User extends RealmObject implements Serializable {
 
+    @PrimaryKey
     private String telNumber;
+
     private String name;
     private String password;
     private int photo;
