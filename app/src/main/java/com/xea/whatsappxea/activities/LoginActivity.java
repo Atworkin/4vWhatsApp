@@ -22,9 +22,14 @@ import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.dialog.RegisterPopupDialog;
 import com.xea.whatsappxea.models.User;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import io.realm.Realm;
+
 
 public class LoginActivity extends AppCompatActivity {
-
+    Realm realm;
     Button btnRegister, btnAcceder, btnVolverPopup, btnRegisterPopup;
     RegisterPopupDialog dialogRegister;
     FirebaseFirestore db;
@@ -35,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        realm = Realm.getDefaultInstance();
 
         db = FirebaseFirestore.getInstance();
 
@@ -63,14 +69,19 @@ public class LoginActivity extends AppCompatActivity {
                         String nombre = txtNompreRegister.getText().toString();
                         String telefono = txtTelefonoRegister.getText().toString();
                         String password = txtPasswordRegister.getText().toString();
-
-                        User newUser = new User(nombre, password, telefono);
                         if (nombre.isEmpty() || telefono.isEmpty() || password.isEmpty()) {
                             Toast.makeText(LoginActivity.this, "Por favor ingrese su número de teléfono y contraseña", Toast.LENGTH_SHORT).show();
                             return;
                         }
+                        Map<String,Object> user = new HashMap<>();
+                        user.put("telNumber",nombre);
+                        user.put("name",telefono);
+                        user.put("password",password);
+                        user.put("photo","");
+                        //User newUser = new User(nombre, password, telefono);
+
                         CollectionReference usersTable = db.collection("users");
-                        DocumentReference row = usersTable.document(newUser.getTelNumber());
+                        DocumentReference row = usersTable.document(user.get("telNumber").toString());
 
                         row.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
@@ -78,10 +89,14 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     DocumentSnapshot document = task.getResult();
                                     if (!document.exists()) {
-                                        row.set(newUser)
+                                        row.set(user)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
+
+                                                        realm.beginTransaction();
+                                                        realm.copyToRealm(new User(user.get("name").toString(),user.get("password").toString(),user.get("telNumber").toString()));
+                                                        realm.commitTransaction();
                                                         Toast.makeText(LoginActivity.this, "Te has registrado correctamente", Toast.LENGTH_SHORT).show();
                                                         dialogRegister.dismiss();
                                                     }
@@ -121,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Por favor ingrese su número de teléfono y contraseña", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 DocumentReference row = db.collection("users").document(tel);
                 row.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -130,9 +146,9 @@ public class LoginActivity extends AppCompatActivity {
                             if (document.exists()) {
                                 String storedPassword = document.getString("password");
                                 if (storedPassword.equals(pass)) {
-                                    User userLogged = document.toObject(User.class);
+                                    String numberUserLogged = document.getString("telNumber");
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    intent.putExtra("userLogged", userLogged);
+                                    intent.putExtra("numberUserLogged", numberUserLogged);
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
