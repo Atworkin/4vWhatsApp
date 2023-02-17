@@ -4,33 +4,30 @@ package com.xea.whatsappxea.models;
 import com.xea.whatsappxea.app.MyApplication;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Conversacion extends RealmObject {
+public class Conversacion {
 
-    @PrimaryKey
     private int id;
-
-    private RealmList<User> participantes;
+    private List<User> participantes;
     private String nombreC;
-    private RealmList<Mensaje> mensajes;
+    private List<Mensaje> mensajes;
     private int photo;
-    private int test;
+
     public Conversacion() {
     }
 
-    public Conversacion(RealmList<User> participantes) {
-        this.id = MyApplication.conversacionID.incrementAndGet() ;
-        this.mensajes = new RealmList<Mensaje>();
+    public Conversacion(List<User> participantes) {
         this.participantes = participantes;
         this.nombreC = "";
         this.photo = 0;
     }
 
-    public Conversacion(RealmList<User> participantes, String nombreC,int photo) {
+    public Conversacion(List<User> participantes, String nombreC,int photo) {
         this(participantes);
         this.nombreC = nombreC;
         this.photo = photo;
@@ -49,11 +46,11 @@ public class Conversacion extends RealmObject {
         this.photo = photo;
     }
 
-    public RealmList<User> getParticipantes() {
+    public List<User> getParticipantes() {
         return participantes;
     }
 
-    public void setParticipantes(RealmList<User> participantes) {
+    public void setParticipantes(List<User> participantes) {
         this.participantes = participantes;
     }
 
@@ -65,11 +62,11 @@ public class Conversacion extends RealmObject {
         this.nombreC = nombreC;
     }
 
-    public RealmList<Mensaje> getMensajes() {
+    public List<Mensaje> getMensajes() {
         return mensajes;
     }
 
-    public void setMensajes(RealmList<Mensaje> mensajes) {
+    public void setMensajes(List<Mensaje> mensajes) {
         this.mensajes = mensajes;
     }
 

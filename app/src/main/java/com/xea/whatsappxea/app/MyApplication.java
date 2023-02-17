@@ -14,7 +14,7 @@ import io.realm.RealmObject;
 import io.realm.RealmResults;
 
 public class MyApplication extends Application {
-
+/**
     //public static AtomicInteger userID = new AtomicInteger();
     public static AtomicInteger conversacionID = new AtomicInteger();
     public static AtomicInteger mensajeID = new AtomicInteger();
@@ -47,5 +47,5 @@ public class MyApplication extends Application {
             return new AtomicInteger(0);
         }
 
-    }
+    }**/
 }

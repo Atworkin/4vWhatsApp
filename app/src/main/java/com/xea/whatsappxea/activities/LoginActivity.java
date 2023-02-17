@@ -29,7 +29,6 @@ import io.realm.Realm;
 
 
 public class LoginActivity extends AppCompatActivity {
-    Realm realm;
     Button btnRegister, btnAcceder, btnVolverPopup, btnRegisterPopup;
     RegisterPopupDialog dialogRegister;
     FirebaseFirestore db;
@@ -40,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        realm = Realm.getDefaultInstance();
 
         db = FirebaseFirestore.getInstance();
 
@@ -73,15 +71,11 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Por favor ingrese su número de teléfono y contraseña", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        Map<String,Object> user = new HashMap<>();
-                        user.put("telNumber",nombre);
-                        user.put("name",telefono);
-                        user.put("password",password);
-                        user.put("photo","");
-                        //User newUser = new User(nombre, password, telefono);
+
+                        User user = new User(nombre, password, telefono);
 
                         CollectionReference usersTable = db.collection("users");
-                        DocumentReference row = usersTable.document(user.get("telNumber").toString());
+                        DocumentReference row = usersTable.document(user.getTelNumber());
 
                         row.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
@@ -93,10 +87,6 @@ public class LoginActivity extends AppCompatActivity {
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
-
-                                                        realm.beginTransaction();
-                                                        realm.copyToRealm(new User(user.get("name").toString(),user.get("password").toString(),user.get("telNumber").toString()));
-                                                        realm.commitTransaction();
                                                         Toast.makeText(LoginActivity.this, "Te has registrado correctamente", Toast.LENGTH_SHORT).show();
                                                         dialogRegister.dismiss();
                                                     }
@@ -146,9 +136,9 @@ public class LoginActivity extends AppCompatActivity {
                             if (document.exists()) {
                                 String storedPassword = document.getString("password");
                                 if (storedPassword.equals(pass)) {
-                                    String numberUserLogged = document.getString("telNumber");
+                                    User userLogged = document.toObject(User.class);
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    intent.putExtra("numberUserLogged", numberUserLogged);
+                                    intent.putExtra("userLogged", userLogged);
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();

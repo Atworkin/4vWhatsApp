@@ -36,11 +36,12 @@ public class AddFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerViewConversaciones);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+    /**
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Conversacion> conversaciones = realm.where(Conversacion.class).findAll();
         List<Conversacion> list = new ArrayList<>(conversaciones);
         listData = list;
+     **/
         return  view;
     }
 }
