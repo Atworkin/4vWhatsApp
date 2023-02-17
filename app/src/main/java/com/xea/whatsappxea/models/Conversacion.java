@@ -18,7 +18,7 @@ public class Conversacion extends RealmObject {
     private String nombreC;
     private RealmList<Mensaje> mensajes;
     private int photo;
-
+    private int test;
     public Conversacion() {
     }
 
