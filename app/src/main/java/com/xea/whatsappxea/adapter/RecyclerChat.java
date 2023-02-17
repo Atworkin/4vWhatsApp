@@ -71,8 +71,6 @@ public class RecyclerDataHolder extends RecyclerView.ViewHolder{
         //photo.setImageResource();
 
 
-
-
     }
 
 }
