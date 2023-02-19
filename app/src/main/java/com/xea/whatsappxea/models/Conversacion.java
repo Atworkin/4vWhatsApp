@@ -1,14 +1,7 @@
 package com.xea.whatsappxea.models;
 
 
-import com.xea.whatsappxea.app.MyApplication;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
 public class Conversacion {
 

@@ -2,6 +2,8 @@ package com.xea.whatsappxea.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        User userLogged = (User) getIntent().getSerializableExtra("userLogged");
+        String userLogged = (String) getIntent().getStringExtra("userLogged");
         //Toast.makeText(MainActivity.this, userLogged.getName(), Toast.LENGTH_SHORT).show();
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
@@ -56,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button myButton = findViewById(R.id.btnContactos);
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ContactosActivity.class);
+                intent.putExtra("userLogged",userLogged);
+                startActivity(intent);
+            }
+        });
 
     }
 }

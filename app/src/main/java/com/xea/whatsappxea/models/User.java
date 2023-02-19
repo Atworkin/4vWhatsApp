@@ -5,9 +5,6 @@ import com.xea.whatsappxea.R;
 import java.io.Serializable;
 import java.util.Objects;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 public class User implements Serializable {
 
     private String telNumber;

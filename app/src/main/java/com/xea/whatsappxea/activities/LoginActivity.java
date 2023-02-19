@@ -25,7 +25,6 @@ import com.xea.whatsappxea.models.User;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.realm.Realm;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -138,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (storedPassword.equals(pass)) {
                                     User userLogged = document.toObject(User.class);
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    intent.putExtra("userLogged", userLogged);
+                                    intent.putExtra("userLogged", userLogged.getTelNumber());
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();

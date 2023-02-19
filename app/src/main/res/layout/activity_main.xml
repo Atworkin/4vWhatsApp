@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity"
-    >
+    tools:context=".activities.MainActivity">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -71,5 +70,21 @@
         app:layout_constraintVertical_bias="0.0">
 
     </androidx.viewpager.widget.ViewPager>
+
+
+    <Button
+        android:id="@+id/btnContactos"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/bnt_contactos_shape"
+        android:drawableStart="@drawable/ic_action_name"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="10dp"
+        android:translationX="160dp"
+        android:translationY="320dp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
