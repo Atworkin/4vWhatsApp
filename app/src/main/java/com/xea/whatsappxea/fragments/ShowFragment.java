@@ -76,8 +76,8 @@ public class ShowFragment extends Fragment {
                                                     RecyclerConversaciones adapter = new RecyclerConversaciones(conversaciones, (string, position) -> {
                                                         Intent intent = new Intent(view.getContext(), ChatActivity.class);
                                                         Conversacion conv = conversaciones.get(position);
-                                                        intent.putExtra("user", "user.getTelNumber()");
-                                                        intent.putExtra("userLogged", "userLogged");
+                                                        intent.putExtra("user", (String)documentSnapshot.get("telNumber"));
+                                                        intent.putExtra("userLogged", "123");
                                                         startActivity(intent);
                                                     });
                                                     recyclerConversaciones = view.findViewById(R.id.recyclerChats);
