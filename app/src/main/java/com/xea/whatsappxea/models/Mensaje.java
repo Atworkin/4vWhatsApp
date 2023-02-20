@@ -1,18 +1,22 @@
 package com.xea.whatsappxea.models;
 
 
-public class Mensaje{
+import java.io.Serializable;
+
+public class Mensaje implements Serializable {
 
     private int id;
     private String idRemitente;
     private String contenido;
+    private String idConversacion;
 
     public Mensaje() {
     }
 
-    public Mensaje(String idRemitente, String contenido) {
+    public Mensaje(String idRemitente, String idConversacion,String contenido) {
         this.idRemitente = idRemitente;
         this.contenido = contenido;
+        this.idConversacion = idConversacion;
     }
 
 

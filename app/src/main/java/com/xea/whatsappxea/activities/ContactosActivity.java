@@ -16,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.xea.whatsappxea.FirebaseDB.FirebaseDB;
 import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.adapter.RecyclerContactos;
 import com.xea.whatsappxea.adapter.RecyclerDataAdapter;
@@ -35,7 +36,7 @@ public class ContactosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contactos);
 
         String userLogged = (String) getIntent().getStringExtra("userLogged");
-        db = FirebaseFirestore.getInstance();
+        db = FirebaseDB.getInstance();
         recyclerViewUsers = findViewById(R.id.recyclerViewContactos);
         Query usersRef = db.collection("users").whereNotEqualTo("telNumber",userLogged);
         usersRef.get()
@@ -65,8 +66,5 @@ public class ContactosActivity extends AppCompatActivity {
                         Toast.makeText(ContactosActivity.this, "Error al obtener datos", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
-
     }
 }

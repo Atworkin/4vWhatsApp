@@ -18,6 +18,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.xea.whatsappxea.FirebaseDB.FirebaseDB;
 import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.dialog.RegisterPopupDialog;
 import com.xea.whatsappxea.models.User;
@@ -39,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        db = FirebaseFirestore.getInstance();
+        db = FirebaseDB.getInstance();
 
         txtTelefono = (EditText) findViewById(R.id.txtTelefonoLogin);
         txtPassword = (EditText) findViewById(R.id.txtPasswordLogin);
@@ -105,7 +106,6 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
                     }
-
                 });
                 btnVolverPopup.setOnClickListener(new View.OnClickListener() {
                     @Override

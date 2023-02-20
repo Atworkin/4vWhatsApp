@@ -71,15 +71,16 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
         }
 
         public void assignData(final Conversacion s, final OnItemClickListener onItemClickListener) {
-           // s.getParticipantes();
-
-            //photo.setImageResource();
+            s.getParticipantes();
+        /**
+            photo.setImageResource();
 
 
             if(!s.getNombreC().equals("")){
                 nombre.setText(s.getNombreC());
                 photo.setImageResource(s.getPhoto());
             }else{
+
                for (User u : s.getParticipantes()){
                    if(!u.equals(new User("","",telEmisor))){
                        nombre.setText(u.getName());
@@ -89,7 +90,7 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
 
 
             }
-            mensaje.setText(s.getLastMensaje().getContenido());
+            //mensaje.setText(s.getLastMensaje().getContenido());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,7 +99,7 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
 
                 }
             });
-
+        **/
         }
 
     }
