@@ -39,18 +39,18 @@ public class ShowFragment extends Fragment {
     }
 
     //ACTUALIZAR FRAGMENT AL AÑADIR CONVERSACION
-
+    //Pasar por parametro el usuario loggeado y sustiruirlo por "123"
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show, container, false);
 
         db = FirebaseDB.getInstance();
-        //Pasar por parametro el usuario loggeado
+
         CollectionReference conversacionesRef = db.collection("conversaciones");
         CollectionReference participantesRef = db.collection("users");
 
-        db.collection("conversaciones")
+        conversacionesRef
                 .whereArrayContains("participantes", "123")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
