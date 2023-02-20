@@ -19,6 +19,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.xea.whatsappxea.FirebaseDB.FirebaseDB;
 import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.models.Conversacion;
+import com.xea.whatsappxea.models.Mensaje;
 import com.xea.whatsappxea.models.User;
 import java.util.Arrays;
 import java.util.List;
@@ -80,7 +81,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-
         CollectionReference mensajesRef = FirebaseFirestore.getInstance().collection("mensajes");
 
         // Llamar al método addSnapshotListener para establecer un listener en la referencia de la colección de mensajes
@@ -95,6 +95,7 @@ public class ChatActivity extends AppCompatActivity {
                     if (dc.getType() == DocumentChange.Type.ADDED) {
                         // Manejar la adición de una nueva fila (row) a la colección de mensajes
                         DocumentSnapshot mensaje = dc.getDocument();
+                        Mensaje nuevoMensaje = mensaje.toObject(Mensaje.class);
                         Toast.makeText(ChatActivity.this, "Nuevo mensaje: " + mensaje.getData(), Toast.LENGTH_SHORT).show();
                         // aquí podrías actualizar tu UI para mostrar el nuevo mensaje
                     }

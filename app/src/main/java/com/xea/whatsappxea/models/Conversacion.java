@@ -6,7 +6,8 @@ import java.util.List;
 
 public class Conversacion implements Serializable {
     private List<String> participantes;
-    //private int photo;
+    private String nombre;
+    private int photo;
 
     public Conversacion() {
     }
@@ -16,18 +17,27 @@ public class Conversacion implements Serializable {
     }
     public Conversacion(List<String> participantes,int photo) {
         this(participantes);
-        //this.photo = photo;
+        this.photo = photo;
+    }
+    public Conversacion(List<String> participantes,String nombre,int photo) {
+        this.participantes = participantes;
+        this.nombre = nombre;
+        this.photo = photo;
+    }
+    public int getPhoto() {
+      return photo;
     }
 
+    public void setPhoto(int photo) {
+        this.photo = photo;
+    }
+    public String getNombre() {
+        return nombre;
+    }
 
-    //public int getPhoto() {
-    //    return photo;
-    //}
-
-    // public void setPhoto(int photo) {
-    //    this.photo = photo;
-    //}
-
+    public void setNombre (String nombre) {
+        this.nombre = nombre;
+    }
     public List<String> getParticipantes() {
         return participantes;
     }
