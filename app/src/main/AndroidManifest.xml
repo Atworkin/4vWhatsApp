@@ -14,7 +14,12 @@
         android:theme="@style/Theme.WhatsAppXEA"
         tools:targetApi="31">
         <activity
+            android:name=".activities.GroupActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
+        <activity
             android:name=".activities.ChatActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -42,8 +47,7 @@
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".activities.ContactosActivity"
-            android:exported="false"
-            >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

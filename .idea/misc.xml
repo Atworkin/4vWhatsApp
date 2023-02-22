@@ -3,7 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/activity_chat.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/activity_contactos.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/activity_group.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/activity_login.xml" value="0.26145833333333335" />
         <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/conversaciones_lista.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/estado.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/fragment_add.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/fragment_details.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/fragment_show.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/llamadas.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/mensaje_chat.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/Asier/AndroidStudioProjects/4vWhatsApp/app/src/main/res/layout/popup_register.xml" value="0.26145833333333335" />
         <entry key="..\:/Users/Asier/AndroidStudioProjects/WhatsAppXEA/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Asier/AndroidStudioProjects/WhatsAppXEA/app/src/main/res/layout/hobbys_lista.xml" value="0.25" />
         <entry key="..\:/Users/xabie/AndroidStudioProjects/4vWhatsApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2075" />
