@@ -2,17 +2,20 @@ package com.xea.whatsappxea.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.adapter.MyViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
-import com.xea.whatsappxea.models.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,10 +26,14 @@ public class MainActivity extends AppCompatActivity {
     MyViewPagerAdapter myViewPagerAdapter;
     androidx.appcompat.widget.Toolbar toolbar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.menu);
+
 
         String userLogged = (String) getIntent().getStringExtra("userLogged");
         //Toast.makeText(MainActivity.this, userLogged.getName(), Toast.LENGTH_SHORT).show();
@@ -67,6 +74,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int item_id = item.getItemId();
 
+                if(item_id==R.id.salir){
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+                return true;
+            }
+        });
     }
+
+
+
+
 }
