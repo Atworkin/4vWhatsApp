@@ -5,7 +5,6 @@ import java.io.Serializable;
 
 public class Mensaje implements Serializable {
 
-    private int id;
     private String idRemitente;
     private String contenido;
     private String idConversacion;
@@ -19,10 +18,6 @@ public class Mensaje implements Serializable {
         this.idConversacion = idConversacion;
     }
 
-
-    public int getId() {
-        return id;
-    }
 
     public String getIdRemitente() {
         return idRemitente;

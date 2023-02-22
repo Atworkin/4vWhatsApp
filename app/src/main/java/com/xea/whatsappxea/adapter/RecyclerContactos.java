@@ -60,9 +60,9 @@ public class RecyclerContactos extends RecyclerView.Adapter<RecyclerContactos.Re
 
         }
 
-        public void assignData(String nombre, int imgAsignatura,OnItemClickListener listener) {
+        public void assignData(String nombre, int img,OnItemClickListener listener) {
             this.nombre.setText(nombre);
-            this.fotoUsuario.setImageResource(imgAsignatura);
+            this.fotoUsuario.setImageResource(img);
             itemView.setOnClickListener(view -> listener.OnItemClick(nombre,getAdapterPosition()));
 
         }

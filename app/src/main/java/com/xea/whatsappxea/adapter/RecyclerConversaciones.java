@@ -9,33 +9,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.xea.whatsappxea.FirebaseDB.FirebaseDB;
 import com.xea.whatsappxea.R;
 import com.xea.whatsappxea.models.Conversacion;
-import com.xea.whatsappxea.models.User;
 
 import java.util.List;
 
 public class RecyclerConversaciones extends RecyclerView.Adapter<RecyclerConversaciones.RecyclerDataHolder>{
     private List<Conversacion> contactosList;
     private OnItemClickListener listener;
-    private String userLogged;
 
     public interface OnItemClickListener{
         void OnItemClick(String string, int position);
     }
 
 
-    public RecyclerConversaciones(List<Conversacion> conversacionListList ,String userLogged,OnItemClickListener listener){
-        this.contactosList = conversacionListList;
-        this.userLogged = userLogged;
+    public RecyclerConversaciones(List<Conversacion> conversacionList ,OnItemClickListener listener){
+        this.contactosList = conversacionList;
         this.listener = listener;
-
     }
 
     @Override
@@ -62,7 +52,7 @@ public class RecyclerConversaciones extends RecyclerView.Adapter<RecyclerConvers
                                                 @Override
                                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                     String nombre = (String) documentSnapshot.get("nombre");
-                                                    holder.assignData(nombre,(int)documentSnapshot.get("photo"),listener);
+
                                                 }
                                             });
                                     break;
@@ -71,6 +61,7 @@ public class RecyclerConversaciones extends RecyclerView.Adapter<RecyclerConvers
                         }
                     }
                 });**/
+        holder.assignData(asign.getNombre(),asign.getPhoto(),listener);
     }
 
     @Override
@@ -97,9 +88,9 @@ public class RecyclerConversaciones extends RecyclerView.Adapter<RecyclerConvers
 
         }
 
-        public void assignData(String nombre, int imgAsignatura,OnItemClickListener listener) {
+        public void assignData(String nombre,int img, OnItemClickListener listener) {
             this.nombre.setText(nombre);
-            this.fotoUsuario.setImageResource(imgAsignatura);
+            this.fotoUsuario.setImageResource(img);
             itemView.setOnClickListener(view -> listener.OnItemClick(nombre,getAdapterPosition()));
 
         }
