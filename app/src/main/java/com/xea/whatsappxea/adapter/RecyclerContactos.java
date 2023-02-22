@@ -25,7 +25,6 @@ public class RecyclerContactos extends RecyclerView.Adapter<RecyclerContactos.Re
 
     public RecyclerContactos(List<User> contactosList, OnItemClickListener listener){
         this.contactosList = contactosList;
-
         this.listener = listener;
 
     }

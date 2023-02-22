@@ -31,36 +31,52 @@ public class ShowFragment extends Fragment {
 
     private RecyclerView recyclerConversaciones;
     private FirebaseFirestore db;
-    List<Conversacion> result;
-
+    private List<Conversacion> conversaciones;
+    private String userLogged;
+    private RecyclerConversaciones adapter;
 
     public ShowFragment() {
         // Required empty public constructor
     }
+    public ShowFragment(String userLogged) {
+        this.userLogged = userLogged;
+    }
 
     //ACTUALIZAR FRAGMENT AL AÑADIR CONVERSACION
-    //Pasar por parametro el usuario loggeado y sustiruirlo por "123"
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show, container, false);
 
         db = FirebaseDB.getInstance();
+        conversaciones = new ArrayList<>();
+
+        adapter = new RecyclerConversaciones(conversaciones, (string, position) -> {
+            Intent intent = new Intent(view.getContext(), ChatActivity.class);
+            Conversacion conv = conversaciones.get(position);
+            intent.putExtra("user", conv.getNombre());
+            intent.putExtra("userLogged", userLogged);
+            startActivity(intent);
+        });
+        recyclerConversaciones = view.findViewById(R.id.recyclerChats);
+        recyclerConversaciones.setAdapter(adapter);
+        recyclerConversaciones.setLayoutManager(new GridLayoutManager(view.getContext(), 1));
 
         CollectionReference conversacionesRef = db.collection("conversaciones");
         CollectionReference participantesRef = db.collection("users");
 
         conversacionesRef
-                .whereArrayContains("participantes", "123")
+                .whereArrayContains("participantes", userLogged)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        List<Conversacion> conversaciones = new ArrayList<>();
+
                         for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             List<String> participantes = (List<String>) documentSnapshot.get("participantes");
                             for (String participante : participantes) {
-                                if (!participante.equals("123")) {
+                                if (!participante.equals(userLogged)) {
                                     participantesRef.document(participante)
                                             .get()
                                             .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -71,24 +87,13 @@ public class ShowFragment extends Fragment {
                                                     newConversacion.setNombre(nombre);
                                                     conversaciones.add(newConversacion);
 
-                                                    // Aquí puedes actualizar tu RecyclerView con la lista de conversaciones obtenidas
-                                                    // por ejemplo, crear un nuevo adapter y establecerlo en tu RecyclerView:
-                                                    RecyclerConversaciones adapter = new RecyclerConversaciones(conversaciones, (string, position) -> {
-                                                        Intent intent = new Intent(view.getContext(), ChatActivity.class);
-                                                        Conversacion conv = conversaciones.get(position);
-                                                        intent.putExtra("user", (String)documentSnapshot.get("telNumber"));
-                                                        intent.putExtra("userLogged", "123");
-                                                        startActivity(intent);
-                                                    });
-                                                    recyclerConversaciones = view.findViewById(R.id.recyclerChats);
-                                                    recyclerConversaciones.setAdapter(adapter);
-                                                    recyclerConversaciones.setLayoutManager(new GridLayoutManager(view.getContext(), 1));
+                                                    adapter.notifyItemInserted(conversaciones.size()-1);
+
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    // Aquí manejas el fallo al obtener el nombre del participante
                                                 }
                                             });
                                     break;
@@ -103,6 +108,7 @@ public class ShowFragment extends Fragment {
                         // Aquí manejas el fallo al obtener la conversación
                     }
                 });
+
 
         return  view;
     }

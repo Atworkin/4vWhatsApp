@@ -16,11 +16,11 @@ public class MyViewPagerAdapter extends FragmentStatePagerAdapter {
     ArrayList<Fragment> fragmentArray;
     private int numberOfTabs;
 
-    public MyViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+    public MyViewPagerAdapter(@NonNull FragmentManager fm, int behavior,String userLogged) {
         super(fm, behavior);
         this.numberOfTabs = behavior;
         fragmentArray = new ArrayList<>();
-        fragmentArray.add(new ShowFragment());
+        fragmentArray.add(new ShowFragment(userLogged));
         fragmentArray.add(new DetailsFragment());
         fragmentArray.add(new AddFragment());
     }
