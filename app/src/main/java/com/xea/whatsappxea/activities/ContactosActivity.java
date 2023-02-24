@@ -55,7 +55,6 @@ public class ContactosActivity extends AppCompatActivity {
                             intent.putExtra("userLogged",userLogged);
                             startActivity(intent);
                         });
-
                         recyclerViewUsers.setAdapter(recyclerDataAdapter);
                         recyclerViewUsers.setLayoutManager(new GridLayoutManager(ContactosActivity.this,1));
                     }

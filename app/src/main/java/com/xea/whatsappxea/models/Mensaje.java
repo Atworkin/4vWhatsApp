@@ -1,8 +1,10 @@
 package com.xea.whatsappxea.models;
 
 
+import com.google.firebase.Timestamp;
 import java.io.Serializable;
 import java.util.Objects;
+
 
 public class Mensaje implements Serializable {
 
@@ -10,7 +12,7 @@ public class Mensaje implements Serializable {
     private String idRemitente;
     private String contenido;
     private String idConversacion;
-
+    private Timestamp fecha;
     public Mensaje() {
     }
 
@@ -18,7 +20,17 @@ public class Mensaje implements Serializable {
         this.idRemitente = idRemitente;
         this.contenido = contenido;
         this.idConversacion = idConversacion;
+        fecha = Timestamp.now();
+
     }
+    public Timestamp getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
+    }
+
     public String getIdConversacion() {
         return idConversacion;
     }

@@ -101,7 +101,7 @@ public class ChatActivity extends AppCompatActivity {
                     });
                 }
                 recyclerChat = findViewById(R.id.recyclerChat);
-                Query getMensajesRef = db.collection("mensajes").whereEqualTo("idConversacion",conversacionActualId);
+                Query getMensajesRef = db.collection("mensajes").whereEqualTo("idConversacion",conversacionActualId).orderBy("fecha");
                 getMensajesRef.get()
                         .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
@@ -112,11 +112,11 @@ public class ChatActivity extends AppCompatActivity {
                                     mensaje.setId(documentSnapshot.getId());
                                     result.add(mensaje);
                                 }
+
                                 recyclerDataAdapter = new RecyclerChat(result,userLogged);
 
                                 recyclerChat.setAdapter(recyclerDataAdapter);
                                 recyclerChat.setLayoutManager(new GridLayoutManager(ChatActivity.this,1));
-
 
 
                                 CollectionReference mensajesRef = db.collection("mensajes");
@@ -150,7 +150,7 @@ public class ChatActivity extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ChatActivity.this, "Error al obtener datos", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             } else {
