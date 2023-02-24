@@ -35,12 +35,15 @@ public class GroupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group);
 
         String userLogged = (String) getIntent().getStringExtra("userLogged");
+        db = FirebaseDB.getInstance();
 
         Query usersRef = db.collection("users").whereNotEqualTo("telNumber",userLogged);
         usersRef.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        users = new ArrayList<>();
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             User user = documentSnapshot.toObject(User.class);
                             users.add(user.getName()+"\n"+user.getTelNumber().toString());
