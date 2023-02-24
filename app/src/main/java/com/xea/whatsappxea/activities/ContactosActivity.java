@@ -59,8 +59,7 @@ public class ContactosActivity extends AppCompatActivity {
                         recyclerViewUsers.setLayoutManager(new GridLayoutManager(ContactosActivity.this,1));
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
+                .addOnFailureListener(new OnFailureListener() {            @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(ContactosActivity.this, "Error al obtener datos", Toast.LENGTH_SHORT).show();
                     }

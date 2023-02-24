@@ -8,6 +8,7 @@ public class Conversacion implements Serializable {
     private List<String> participantes;
     private String nombre;
     private int photo;
+    private boolean isGroup;
 
     public Conversacion() {
     }
@@ -23,6 +24,11 @@ public class Conversacion implements Serializable {
         this.participantes = participantes;
         this.nombre = nombre;
         this.photo = photo;
+    }
+
+    public boolean getIsGroup(){return isGroup;}
+    public void setIsGroup(boolean isGroup){
+        this.isGroup = isGroup;
     }
     public int getPhoto() {
       return photo;
