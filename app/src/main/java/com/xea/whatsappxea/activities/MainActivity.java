@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
                 if(item_id==R.id.salir){
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
+                }else if(item_id==R.id.nuevogrupo){
+                    Intent intent = new Intent(MainActivity.this, GroupActivity.class);
+                    intent.putExtra("userLogged",userLogged);
+                    startActivity(intent);
                 }
                 return true;
             }
