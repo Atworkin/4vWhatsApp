@@ -114,6 +114,7 @@ public class GroupActivity extends AppCompatActivity {
                   }else{
                       txtOut.add(userLogged);
                       Conversacion c = new Conversacion( txtOut,nombreG.getText().toString(),R.drawable.people);
+                      c.setIsGroup(true);
                       CollectionReference conversacionesRef = db.collection("conversaciones");
                       conversacionesRef.add(c);
 
