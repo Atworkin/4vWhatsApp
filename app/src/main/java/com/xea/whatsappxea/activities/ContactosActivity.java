@@ -37,6 +37,7 @@ public class ContactosActivity extends AppCompatActivity {
 
         String userLogged = (String) getIntent().getStringExtra("userLogged");
         db = FirebaseDB.getInstance();
+
         recyclerViewUsers = findViewById(R.id.recyclerViewContactos);
         Query usersRef = db.collection("users").whereNotEqualTo("telNumber",userLogged);
         usersRef.get()
@@ -64,5 +65,6 @@ public class ContactosActivity extends AppCompatActivity {
                         Toast.makeText(ContactosActivity.this, "Error al obtener datos", Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
 }
