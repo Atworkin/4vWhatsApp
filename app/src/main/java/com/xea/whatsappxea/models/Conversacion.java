@@ -8,7 +8,12 @@ public class Conversacion implements Serializable {
     private List<String> participantes;
     private String nombre;
     private int photo;
+    private String telfUser;
+    private String id;
+
     private boolean isGroup;
+
+
 
     public Conversacion() {
     }
@@ -52,4 +57,27 @@ public class Conversacion implements Serializable {
         this.participantes = participantes;
     }
 
+    public String getTelfUser() {
+        return telfUser;
+    }
+
+    public void setTelfUser(String telfUser) {
+        this.telfUser = telfUser;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isGroup() {
+        return isGroup;
+    }
+
+    public void setGroup(boolean group) {
+        isGroup = group;
+    }
 }

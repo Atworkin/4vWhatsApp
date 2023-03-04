@@ -32,35 +32,6 @@ public class RecyclerConversaciones extends RecyclerView.Adapter<RecyclerConvers
     public void onBindViewHolder(@NonNull RecyclerDataHolder holder, int position) {
         Conversacion asign = contactosList.get(position);
 
-        /**
-        FirebaseFirestore db = FirebaseDB.getInstance();
-        CollectionReference conversacionesRef = db.collection("conversaciones");
-        CollectionReference participantesRef = db.collection("users");
-        conversacionesRef.whereArrayContains("participantes", userLogged)
-                .limit(1)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            List<String> participantes = (List<String>) documentSnapshot.get("participantes");
-                            for (String participante : participantes) {
-                                if (!participante.equals(userLogged)) {
-                                    participantesRef.document(participante)
-                                            .get()
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                                @Override
-                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                    String nombre = (String) documentSnapshot.get("nombre");
-
-                                                }
-                                            });
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                });**/
         holder.assignData(asign.getNombre(),asign.getPhoto(),listener);
     }
 

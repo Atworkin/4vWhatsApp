@@ -56,126 +56,126 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        result = new ArrayList<>();
+
         db = FirebaseDB.getInstance();
+        result = new ArrayList<>();
 
-        String userTel =(String) getIntent().getStringExtra("user");
+        String userTel =(String) getIntent().getStringExtra("userClickedTlf");
         String userLogged = (String) getIntent().getStringExtra("userLogged");
+        String nombreConversacion = (String) getIntent().getStringExtra("nombreConversacion");
+        String idGrupo = (String) getIntent().getStringExtra("idGrupo");
         List<String> participantes = Arrays.asList(userTel, userLogged);
-        if (userTel != null) {
-            DocumentReference docRef = db.collection("users").document(userTel);
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                                userClicked = document.toObject(User.class);
-                        }
+
+        if (idGrupo!=null){
+
+
+
+
+        }else{
+
+            CollectionReference tablaRefConversaciones = db.collection("conversaciones");
+            List<String>participantesRev = new ArrayList<>(participantes);
+            Collections.reverse(participantesRev);
+
+            Query query = tablaRefConversaciones.whereIn("participantes", Arrays.asList(participantes, participantesRev));
+
+            query.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    QuerySnapshot querySnapshot = task.getResult();
+                    if (!querySnapshot.isEmpty()) {
+                        DocumentSnapshot docSnapshot = querySnapshot.getDocuments().get(0);
+                        conversacionActualId = docSnapshot.getId();
+                    } else {
+                        Conversacion conversacionNueva = new Conversacion(participantes);
+                        tablaRefConversaciones.add(conversacionNueva).addOnSuccessListener(documentReference -> {
+                            conversacionActualId = documentReference.getId();
+                        }).addOnFailureListener(e -> {
+                            Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
                     }
-                     else {
-                        Toast.makeText(ChatActivity.this, "Error de conexión con la base de datos", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
+                    recyclerChat = findViewById(R.id.recyclerChat);
+                    Query getMensajesRef = db.collection("mensajes")
+                            .whereEqualTo("idConversacion",conversacionActualId).orderBy("fecha");
+                    getMensajesRef.get()
+                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    result = new ArrayList<>();
+                                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                        Mensaje mensaje = documentSnapshot.toObject(Mensaje.class);
+                                        mensaje.setId(documentSnapshot.getId());
+                                        result.add(mensaje);
+                                    }
 
-        CollectionReference tablaRefConversaciones = db.collection("conversaciones");
-        List<String>participantesRev = new ArrayList<>(participantes);
-        Collections.reverse(participantesRev);
+                                    recyclerDataAdapter = new RecyclerChat(result,userLogged);
 
-        Query query = tablaRefConversaciones.whereIn("participantes", Arrays.asList(participantes, participantesRev));
-
-        query.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                QuerySnapshot querySnapshot = task.getResult();
-                if (!querySnapshot.isEmpty()) {
-                    DocumentSnapshot docSnapshot = querySnapshot.getDocuments().get(0);
-                    conversacionActualId = docSnapshot.getId();
-                } else {
-                    Conversacion conversacionNueva = new Conversacion(participantes);
-                    tablaRefConversaciones.add(conversacionNueva).addOnSuccessListener(documentReference -> {
-                        conversacionActualId = documentReference.getId();
-                    }).addOnFailureListener(e -> {
-                        Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
-                }
-                recyclerChat = findViewById(R.id.recyclerChat);
-                Query getMensajesRef = db.collection("mensajes").whereEqualTo("idConversacion",conversacionActualId).orderBy("fecha");
-                getMensajesRef.get()
-                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                result = new ArrayList<>();
-                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                    Mensaje mensaje = documentSnapshot.toObject(Mensaje.class);
-                                    mensaje.setId(documentSnapshot.getId());
-                                    result.add(mensaje);
-                                }
-
-                                recyclerDataAdapter = new RecyclerChat(result,userLogged);
-
-                                recyclerChat.setAdapter(recyclerDataAdapter);
-                                recyclerChat.setLayoutManager(new GridLayoutManager(ChatActivity.this,1));
+                                    recyclerChat.setAdapter(recyclerDataAdapter);
+                                    recyclerChat.setLayoutManager(new GridLayoutManager(ChatActivity.this,1));
 
 
-                                CollectionReference mensajesRef = db.collection("mensajes");
+                                    CollectionReference mensajesRef = db.collection("mensajes");
 
-                                mensajesRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException error) {
-                                        if (error != null) {
-                                            Toast.makeText(ChatActivity.this, "Error al obtener los mensajes:" + error.getMessage(), Toast.LENGTH_SHORT).show();
-                                            return;
-                                        }
+                                    mensajesRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException error) {
+                                            if (error != null) {
+                                                Toast.makeText(ChatActivity.this, "Error al obtener los mensajes:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                                return;
+                                            }
 
-                                        for (DocumentChange dc : snapshot.getDocumentChanges()) {
-                                            if (dc.getType() == DocumentChange.Type.ADDED) {
+                                            for (DocumentChange dc : snapshot.getDocumentChanges()) {
+                                                if (dc.getType() == DocumentChange.Type.ADDED) {
 
-                                                DocumentSnapshot mensaje = dc.getDocument();
-                                                Mensaje nuevoMensaje = mensaje.toObject(Mensaje.class);
-                                                nuevoMensaje.setId(mensaje.getId());
+                                                    DocumentSnapshot mensaje = dc.getDocument();
+                                                    Mensaje nuevoMensaje = mensaje.toObject(Mensaje.class);
+                                                    nuevoMensaje.setId(mensaje.getId());
 
-                                                if (nuevoMensaje.getIdConversacion().equals(conversacionActualId) && !result.contains(nuevoMensaje)) {
-                                                    result.add(nuevoMensaje);
-                                                    recyclerDataAdapter.notifyItemInserted(result.size()-1);
+                                                    if (nuevoMensaje.getIdConversacion().equals(conversacionActualId) && !result.contains(nuevoMensaje)) {
+                                                        result.add(nuevoMensaje);
+                                                        recyclerDataAdapter.notifyItemInserted(result.size()-1);
 
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                                });
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            } else {
-                Exception e = task.getException();
-                Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btnSend = (Button) findViewById(R.id.btnSendMsg);
-        txtMessage = (EditText) findViewById(R.id.txtMsg);
-        CollectionReference tablaRefMensajes = db.collection("mensajes");
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String contentMsg = String.valueOf(txtMessage.getText());
-                Mensaje newMensaje = new Mensaje(userLogged,conversacionActualId,contentMsg);
-                tablaRefMensajes.add(newMensaje).addOnSuccessListener(documentReference -> {
-                txtMessage.setText("");
-                }).addOnFailureListener(e -> {
+                                    });
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                } else {
+                    Exception e = task.getException();
                     Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+                }
+            });
 
-            }
-        });
+            btnSend = (Button) findViewById(R.id.btnSendMsg);
+            txtMessage = (EditText) findViewById(R.id.txtMsg);
+            CollectionReference tablaRefMensajes = db.collection("mensajes");
+            btnSend.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String contentMsg = String.valueOf(txtMessage.getText());
+                    Mensaje newMensaje = new Mensaje(userLogged,conversacionActualId,contentMsg);
+                    tablaRefMensajes.add(newMensaje).addOnSuccessListener(documentReference -> {
+                        txtMessage.setText("");
+                    }).addOnFailureListener(e -> {
+                        Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+
+                }
+            });
 
         }
+        }
+
+
+
+
+
 
     }

@@ -52,7 +52,7 @@ public class ContactosActivity extends AppCompatActivity {
                         RecyclerContactos recyclerDataAdapter = new RecyclerContactos(result,(string, position)->{
                             Intent intent = new Intent(ContactosActivity.this, ChatActivity.class);
                             User user = result.get(position);
-                            intent.putExtra("user",user.getTelNumber());
+                            intent.putExtra("userClickedTlf",user.getTelNumber());
                             intent.putExtra("userLogged",userLogged);
                             startActivity(intent);
                         });

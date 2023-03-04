@@ -55,8 +55,10 @@ public class ShowFragment extends Fragment {
         adapter = new RecyclerConversaciones(conversaciones, (string, position) -> {
             Intent intent = new Intent(view.getContext(), ChatActivity.class);
             Conversacion conv = conversaciones.get(position);
-            intent.putExtra("user", conv.getNombre());
             intent.putExtra("userLogged", userLogged);
+            intent.putExtra("nombreConversacion", conv.getNombre());
+            intent.putExtra("userClickedTlf", conv.getTelfUser());
+            intent.putExtra("idGrupo", conv.getId());
             startActivity(intent);
         });
         recyclerConversaciones = view.findViewById(R.id.recyclerChats);
@@ -75,28 +77,40 @@ public class ShowFragment extends Fragment {
 
                         for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             List<String> participantes = (List<String>) documentSnapshot.get("participantes");
-                            for (String participante : participantes) {
+                            Conversacion newConversacion = documentSnapshot.toObject(Conversacion.class);
+                            if(newConversacion.getIsGroup()){
+                                newConversacion.setId(documentSnapshot.getId());
+                                conversaciones.add(newConversacion);
+                                adapter.notifyItemInserted(conversaciones.size()-1);
+
+                            }else{
+                                for (String participante : participantes) {
                                 if (!participante.equals(userLogged)) {
-                                    participantesRef.document(participante)
-                                            .get()
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                                @Override
-                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                    String nombre = (String) documentSnapshot.get("name");
-                                                    Conversacion newConversacion = documentSnapshot.toObject(Conversacion.class);
-                                                    newConversacion.setNombre(nombre);
-                                                    conversaciones.add(newConversacion);
+                                        participantesRef.document(participante)
+                                                .get()
+                                                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                        String nombre = (String) documentSnapshot.get("name");
+                                                        String tlf = (String) documentSnapshot.get("telNumber");
+                                                        Number photoNumber = (Number) documentSnapshot.get("photo");
+                                                        int photo = photoNumber.intValue();
+                                                        newConversacion.setNombre(nombre);
+                                                        newConversacion.setPhoto(photo);
+                                                        newConversacion.setTelfUser(tlf);
+                                                        conversaciones.add(newConversacion);
 
-                                                    adapter.notifyItemInserted(conversaciones.size()-1);
+                                                        adapter.notifyItemInserted(conversaciones.size()-1);
 
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                }
-                                            });
-                                    break;
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                    }
+                                                });
+                                        break;
+                                    }
                                 }
                             }
                         }
