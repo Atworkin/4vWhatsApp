@@ -13,6 +13,7 @@ public class Mensaje implements Serializable {
     private String contenido;
     private String idConversacion;
     private Timestamp fecha;
+    private String nombre;
     public Mensaje() {
     }
 
@@ -60,6 +61,14 @@ public class Mensaje implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     @Override

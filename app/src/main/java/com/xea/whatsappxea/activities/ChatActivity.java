@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,6 +53,7 @@ public class ChatActivity extends AppCompatActivity {
     List<Mensaje> result;
     Button btnSend;
     EditText txtMessage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,21 +62,75 @@ public class ChatActivity extends AppCompatActivity {
         db = FirebaseDB.getInstance();
         result = new ArrayList<>();
 
-        String userTel =(String) getIntent().getStringExtra("userClickedTlf");
+        String userTel = (String) getIntent().getStringExtra("userClickedTlf");
         String userLogged = (String) getIntent().getStringExtra("userLogged");
         String nombreConversacion = (String) getIntent().getStringExtra("nombreConversacion");
         String idGrupo = (String) getIntent().getStringExtra("idGrupo");
         List<String> participantes = Arrays.asList(userTel, userLogged);
 
-        if (idGrupo!=null){
+        if (idGrupo != null) {
+            conversacionActualId = idGrupo;
+            recyclerChat = findViewById(R.id.recyclerChat);
+            Query getMensajesRef = db.collection("mensajes")
+                    .whereEqualTo("idConversacion", conversacionActualId).orderBy("fecha");
+            getMensajesRef.get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            result = new ArrayList<>();
+                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                Mensaje mensaje = documentSnapshot.toObject(Mensaje.class);
+                                mensaje.setId(documentSnapshot.getId());
 
 
+                                result.add(mensaje);
+                            }
+
+                            recyclerDataAdapter = new RecyclerChat(result, userLogged, true);
+
+                            recyclerChat.setAdapter(recyclerDataAdapter);
+                            recyclerChat.setLayoutManager(new GridLayoutManager(ChatActivity.this, 1));
 
 
-        }else{
+                            CollectionReference mensajesRef = db.collection("mensajes");
+
+                            mensajesRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                @Override
+                                public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException error) {
+                                    if (error != null) {
+                                        Toast.makeText(ChatActivity.this, "Error al obtener los mensajes:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                    for (DocumentChange dc : snapshot.getDocumentChanges()) {
+                                        if (dc.getType() == DocumentChange.Type.ADDED) {
+
+                                            DocumentSnapshot mensaje = dc.getDocument();
+                                            Mensaje nuevoMensaje = mensaje.toObject(Mensaje.class);
+                                            nuevoMensaje.setId(mensaje.getId());
+
+                                            if (nuevoMensaje.getIdConversacion().equals(conversacionActualId) && !result.contains(nuevoMensaje)) {
+                                                result.add(nuevoMensaje);
+                                                recyclerDataAdapter.notifyItemInserted(result.size() - 1);
+
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+        } else {
 
             CollectionReference tablaRefConversaciones = db.collection("conversaciones");
-            List<String>participantesRev = new ArrayList<>(participantes);
+            List<String> participantesRev = new ArrayList<>(participantes);
             Collections.reverse(participantesRev);
 
             Query query = tablaRefConversaciones.whereIn("participantes", Arrays.asList(participantes, participantesRev));
@@ -95,7 +151,7 @@ public class ChatActivity extends AppCompatActivity {
                     }
                     recyclerChat = findViewById(R.id.recyclerChat);
                     Query getMensajesRef = db.collection("mensajes")
-                            .whereEqualTo("idConversacion",conversacionActualId).orderBy("fecha");
+                            .whereEqualTo("idConversacion", conversacionActualId).orderBy("fecha");
                     getMensajesRef.get()
                             .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                 @Override
@@ -107,10 +163,10 @@ public class ChatActivity extends AppCompatActivity {
                                         result.add(mensaje);
                                     }
 
-                                    recyclerDataAdapter = new RecyclerChat(result,userLogged);
+                                    recyclerDataAdapter = new RecyclerChat(result, userLogged, false);
 
                                     recyclerChat.setAdapter(recyclerDataAdapter);
-                                    recyclerChat.setLayoutManager(new GridLayoutManager(ChatActivity.this,1));
+                                    recyclerChat.setLayoutManager(new GridLayoutManager(ChatActivity.this, 1));
 
 
                                     CollectionReference mensajesRef = db.collection("mensajes");
@@ -132,7 +188,7 @@ public class ChatActivity extends AppCompatActivity {
 
                                                     if (nuevoMensaje.getIdConversacion().equals(conversacionActualId) && !result.contains(nuevoMensaje)) {
                                                         result.add(nuevoMensaje);
-                                                        recyclerDataAdapter.notifyItemInserted(result.size()-1);
+                                                        recyclerDataAdapter.notifyItemInserted(result.size() - 1);
 
                                                     }
                                                 }
@@ -153,29 +209,34 @@ public class ChatActivity extends AppCompatActivity {
                 }
             });
 
-            btnSend = (Button) findViewById(R.id.btnSendMsg);
-            txtMessage = (EditText) findViewById(R.id.txtMsg);
-            CollectionReference tablaRefMensajes = db.collection("mensajes");
-            btnSend.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String contentMsg = String.valueOf(txtMessage.getText());
-                    Mensaje newMensaje = new Mensaje(userLogged,conversacionActualId,contentMsg);
-                    tablaRefMensajes.add(newMensaje).addOnSuccessListener(documentReference -> {
-                        txtMessage.setText("");
-                    }).addOnFailureListener(e -> {
-                        Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
-
-                }
-            });
 
         }
-        }
+        btnSend = (Button) findViewById(R.id.btnSendMsg);
+        txtMessage = (EditText) findViewById(R.id.txtMsg);
+        CollectionReference tablaRefMensajes = db.collection("mensajes");
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String contentMsg = String.valueOf(txtMessage.getText());
 
+                DocumentReference docRef = db.collection("users").document(userLogged);
+                docRef.get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            String username = document.getString("name");
+                            Mensaje newMensaje = new Mensaje(userLogged, conversacionActualId, contentMsg);
+                            newMensaje.setNombre(username);
+                            tablaRefMensajes.add(newMensaje).addOnSuccessListener(documentReference -> {
+                                txtMessage.setText("");
+                            }).addOnFailureListener(e -> {
+                                Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
 
-
-
-
-
+                        }
+                    }
+                });
+            }
+        });
     }
+}
