@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Estados"));
         tabLayout.addTab(tabLayout.newTab().setText("Llamadas"));
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),userLogged);
+        myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), userLogged);
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ContactosActivity.class);
-                intent.putExtra("userLogged",userLogged);
+                intent.putExtra("userLogged", userLogged);
                 startActivity(intent);
             }
         });
@@ -77,12 +77,12 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 int item_id = item.getItemId();
 
-                if(item_id==R.id.salir){
+                if (item_id == R.id.salir) {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
-                }else if(item_id==R.id.nuevogrupo){
+                } else if (item_id == R.id.nuevogrupo) {
                     Intent intent = new Intent(MainActivity.this, GroupActivity.class);
-                    intent.putExtra("userLogged",userLogged);
+                    intent.putExtra("userLogged", userLogged);
                     startActivity(intent);
                 }
                 return true;

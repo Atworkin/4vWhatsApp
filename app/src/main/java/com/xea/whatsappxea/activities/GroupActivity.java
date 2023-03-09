@@ -47,15 +47,15 @@ public class GroupActivity extends AppCompatActivity {
 
         String userLogged = (String) getIntent().getStringExtra("userLogged");
         db = FirebaseDB.getInstance();
-        spinner = (Spinner)  findViewById(R.id.spinner);
-        nums = (TextView)  findViewById(R.id.txtNums);
-        fotoG = (TextView)  findViewById(R.id.txtFotoGrupo);
-        nombreG = (TextView)  findViewById(R.id.txtNombreGrupo);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        nums = (TextView) findViewById(R.id.txtNums);
+        fotoG = (TextView) findViewById(R.id.txtFotoGrupo);
+        nombreG = (TextView) findViewById(R.id.txtNombreGrupo);
 
         aceptar = (Button) findViewById(R.id.btnAceptar);
         cancelar = (Button) findViewById(R.id.btnCancelar);
 
-        Query usersRef = db.collection("users").whereNotEqualTo("telNumber",userLogged);
+        Query usersRef = db.collection("users").whereNotEqualTo("telNumber", userLogged);
         usersRef.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -80,60 +80,60 @@ public class GroupActivity extends AppCompatActivity {
                 });
 
         List<String> txtOut = new ArrayList<>();
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    String num = spinner.getSelectedItem().toString();
-                    if (txtOut.contains(num)&&num!=""){
-                        txtOut.remove(num);
-                    }else if(num!=""){
-                        txtOut.add(num);
-                    }
-
-                     String out = "";
-
-                    for(String s: txtOut){
-                        out+=s+"\n";
-                    }
-
-
-                    nums.setText(out);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String num = spinner.getSelectedItem().toString();
+                if (txtOut.contains(num) && num != "") {
+                    txtOut.remove(num);
+                } else if (num != "") {
+                    txtOut.add(num);
                 }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
+                String out = "";
 
+                for (String s : txtOut) {
+                    out += s + "\n";
                 }
-            });
-
-          aceptar.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                  if(nombreG.equals("")||nums.equals("")){
-                      Toast.makeText(GroupActivity.this, "Deve elegir participantes al grupo y darle un nombre", Toast.LENGTH_SHORT).show();
-                  }else{
-                      txtOut.add(userLogged);
-                      Conversacion c = new Conversacion( txtOut,nombreG.getText().toString(),R.drawable.people);
-                      c.setIsGroup(true);
-                      CollectionReference conversacionesRef = db.collection("conversaciones");
-                      conversacionesRef.add(c);
-
-                      Intent intent = new Intent(GroupActivity.this, MainActivity.class);
-                      intent.putExtra("userLogged",userLogged);
-                      startActivity(intent);
-                  }
-              }
-          });
 
 
-          cancelar.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                  Intent intent = new Intent(GroupActivity.this, MainActivity.class);
-                  intent.putExtra("userLogged",userLogged);
-                  startActivity(intent);
-              }
-          });
+                nums.setText(out);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (nombreG.equals("") || nums.equals("")) {
+                    Toast.makeText(GroupActivity.this, "Deve elegir participantes al grupo y darle un nombre", Toast.LENGTH_SHORT).show();
+                } else {
+                    txtOut.add(userLogged);
+                    Conversacion c = new Conversacion(txtOut, nombreG.getText().toString(), R.drawable.people);
+                    c.setIsGroup(true);
+                    CollectionReference conversacionesRef = db.collection("conversaciones");
+                    conversacionesRef.add(c);
+
+                    Intent intent = new Intent(GroupActivity.this, MainActivity.class);
+                    intent.putExtra("userLogged", userLogged);
+                    startActivity(intent);
+                }
+            }
+        });
+
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GroupActivity.this, MainActivity.class);
+                intent.putExtra("userLogged", userLogged);
+                startActivity(intent);
+            }
+        });
     }
 
 }

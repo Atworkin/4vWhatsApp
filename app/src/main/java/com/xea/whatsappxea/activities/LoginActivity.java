@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
 public class LoginActivity extends AppCompatActivity {
     Button btnRegister, btnAcceder, btnVolverPopup, btnRegisterPopup;
     RegisterPopupDialog dialogRegister;

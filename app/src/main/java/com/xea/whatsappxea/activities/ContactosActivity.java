@@ -30,6 +30,7 @@ public class ContactosActivity extends AppCompatActivity {
     List<User> result;
     RecyclerView recyclerViewUsers;
     FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,7 @@ public class ContactosActivity extends AppCompatActivity {
         db = FirebaseDB.getInstance();
 
         recyclerViewUsers = findViewById(R.id.recyclerViewContactos);
-        Query usersRef = db.collection("users").whereNotEqualTo("telNumber",userLogged);
+        Query usersRef = db.collection("users").whereNotEqualTo("telNumber", userLogged);
         usersRef.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -49,16 +50,16 @@ public class ContactosActivity extends AppCompatActivity {
                             User user = documentSnapshot.toObject(User.class);
                             result.add(user);
                         }
-                        RecyclerContactos recyclerDataAdapter = new RecyclerContactos(result,(string, position)->{
+                        RecyclerContactos recyclerDataAdapter = new RecyclerContactos(result, (string, position) -> {
                             Intent intent = new Intent(ContactosActivity.this, ChatActivity.class);
                             User user = result.get(position);
-                            intent.putExtra("userClickedTlf",user.getTelNumber());
-                            intent.putExtra("userLogged",userLogged);
+                            intent.putExtra("userClickedTlf", user.getTelNumber());
+                            intent.putExtra("userLogged", userLogged);
                             startActivity(intent);
                             finish();
                         });
                         recyclerViewUsers.setAdapter(recyclerDataAdapter);
-                        recyclerViewUsers.setLayoutManager(new GridLayoutManager(ContactosActivity.this,1));
+                        recyclerViewUsers.setLayoutManager(new GridLayoutManager(ContactosActivity.this, 1));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

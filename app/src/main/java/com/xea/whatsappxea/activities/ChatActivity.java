@@ -218,24 +218,25 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String contentMsg = String.valueOf(txtMessage.getText());
+                if(!contentMsg.equals("")){
+                    DocumentReference docRef = db.collection("users").document(userLogged);
+                    docRef.get().addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                String username = document.getString("name");
+                                Mensaje newMensaje = new Mensaje(userLogged, conversacionActualId, contentMsg);
+                                newMensaje.setNombre(username);
+                                tablaRefMensajes.add(newMensaje).addOnSuccessListener(documentReference -> {
+                                    txtMessage.setText("");
+                                }).addOnFailureListener(e -> {
+                                    Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                });
 
-                DocumentReference docRef = db.collection("users").document(userLogged);
-                docRef.get().addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            String username = document.getString("name");
-                            Mensaje newMensaje = new Mensaje(userLogged, conversacionActualId, contentMsg);
-                            newMensaje.setNombre(username);
-                            tablaRefMensajes.add(newMensaje).addOnSuccessListener(documentReference -> {
-                                txtMessage.setText("");
-                            }).addOnFailureListener(e -> {
-                                Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            });
-
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     }
