@@ -6,4 +6,9 @@
     <string name="contrase_a">Contraseña</string>
     <string name="tel_fono">Teléfono</string>
     <string name="nombre">Nombre</string>
+    <string name="contrase_as">Contraseña</string>
+    <string name="tel_fonos">Teléfono</string>
+    <string name="iniciar_sesion">Iniciar Sesion</string>
+    <string name="registrar">Registrarse</string>
+    <string name="todo">TODO</string>
 </resources>

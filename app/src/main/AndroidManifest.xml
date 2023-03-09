@@ -47,6 +47,7 @@
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".activities.ContactosActivity"
+            android:label="Contactos"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

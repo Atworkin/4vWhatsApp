@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
         //Toast.makeText(MainActivity.this, userLogged.getName(), Toast.LENGTH_SHORT).show();
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("SHOW"));
-        tabLayout.addTab(tabLayout.newTab().setText("DETAILS"));
-        tabLayout.addTab(tabLayout.newTab().setText("ADD"));
+        tabLayout.addTab(tabLayout.newTab().setText("Chats"));
+        tabLayout.addTab(tabLayout.newTab().setText("Estados"));
+        tabLayout.addTab(tabLayout.newTab().setText("Llamadas"));
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),userLogged);
         viewPager.setAdapter(myViewPagerAdapter);

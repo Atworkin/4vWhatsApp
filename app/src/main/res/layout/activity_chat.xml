@@ -15,7 +15,8 @@
         app:layout_constraintBottom_toTopOf="@+id/linear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/fondo_whatsapp"/>
 
     <LinearLayout
         android:id="@+id/linear"
@@ -40,7 +41,10 @@
             android:id="@+id/btnSendMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enviar" />
+            android:text="Enviar"
+            android:background="@drawable/btn_sendmsg"
+            android:layout_margin="2dp"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
