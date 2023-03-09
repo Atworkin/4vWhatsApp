@@ -111,7 +111,9 @@ public class GroupActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (nombreG.equals("") || nums.equals("")) {
                     Toast.makeText(GroupActivity.this, "Deve elegir participantes al grupo y darle un nombre", Toast.LENGTH_SHORT).show();
-                } else {
+                }else if(txtOut.size() < 2){
+                    Toast.makeText(GroupActivity.this, "El grupo tiene que tener mas de dos participantes", Toast.LENGTH_SHORT).show();
+                }else {
                     txtOut.add(userLogged);
                     Conversacion c = new Conversacion(txtOut, nombreG.getText().toString(), R.drawable.people);
                     c.setIsGroup(true);
