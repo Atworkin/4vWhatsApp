@@ -16,11 +16,11 @@
         <activity
             android:name=".activities.GroupActivity"
             android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".activities.ChatActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -47,8 +47,8 @@
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".activities.ContactosActivity"
-            android:label="Contactos"
-            android:exported="false">
+            android:exported="false"
+            android:label="Contactos">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

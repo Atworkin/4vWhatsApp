@@ -55,6 +55,7 @@ public class ContactosActivity extends AppCompatActivity {
                             intent.putExtra("userClickedTlf",user.getTelNumber());
                             intent.putExtra("userLogged",userLogged);
                             startActivity(intent);
+                            finish();
                         });
                         recyclerViewUsers.setAdapter(recyclerDataAdapter);
                         recyclerViewUsers.setLayoutManager(new GridLayoutManager(ContactosActivity.this,1));

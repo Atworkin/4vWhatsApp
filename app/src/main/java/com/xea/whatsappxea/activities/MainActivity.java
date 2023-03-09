@@ -19,7 +19,6 @@ import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-
     TabLayout tabLayout;
     ViewPager viewPager;
     MyViewPagerAdapter myViewPagerAdapter;
@@ -90,8 +89,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 }

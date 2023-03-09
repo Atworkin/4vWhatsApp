@@ -15,7 +15,6 @@ public class MyViewPagerAdapter extends FragmentStatePagerAdapter {
 
     ArrayList<Fragment> fragmentArray;
     private int numberOfTabs;
-
     public MyViewPagerAdapter(@NonNull FragmentManager fm, int behavior,String userLogged) {
         super(fm, behavior);
         this.numberOfTabs = behavior;
@@ -28,7 +27,6 @@ public class MyViewPagerAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-
         return fragmentArray.get(position);
     }
 

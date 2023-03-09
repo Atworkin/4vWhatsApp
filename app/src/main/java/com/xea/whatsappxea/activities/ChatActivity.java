@@ -47,7 +47,6 @@ public class ChatActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
     String conversacionActualId;
-    User userClicked;
     RecyclerView recyclerChat;
     RecyclerChat recyclerDataAdapter;
     List<Mensaje> result;
@@ -58,6 +57,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
 
         db = FirebaseDB.getInstance();
         result = new ArrayList<>();

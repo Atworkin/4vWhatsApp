@@ -3,6 +3,7 @@ package com.xea.whatsappxea.models;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class Conversacion implements Serializable {
     private List<String> participantes;
@@ -73,11 +74,16 @@ public class Conversacion implements Serializable {
         this.id = id;
     }
 
-    public boolean isGroup() {
-        return isGroup;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Conversacion)) return false;
+        Conversacion that = (Conversacion) o;
+        return Objects.equals(id, that.id);
     }
 
-    public void setGroup(boolean group) {
-        isGroup = group;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

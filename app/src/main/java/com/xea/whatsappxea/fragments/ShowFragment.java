@@ -38,6 +38,7 @@ public class ShowFragment extends Fragment {
     public ShowFragment() {
         // Required empty public constructor
     }
+
     public ShowFragment(String userLogged) {
         this.userLogged = userLogged;
     }
@@ -66,7 +67,7 @@ public class ShowFragment extends Fragment {
         recyclerConversaciones.setLayoutManager(new GridLayoutManager(view.getContext(), 1));
 
         CollectionReference conversacionesRef = db.collection("conversaciones");
-        CollectionReference participantesRef = db.collection("users");
+
 
         conversacionesRef
                 .whereArrayContains("participantes", userLogged)
@@ -78,14 +79,15 @@ public class ShowFragment extends Fragment {
                         for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             List<String> participantes = (List<String>) documentSnapshot.get("participantes");
                             Conversacion newConversacion = documentSnapshot.toObject(Conversacion.class);
-                            if(newConversacion.getIsGroup()){
+                            CollectionReference participantesRef = db.collection("users");
+                            if (newConversacion.getIsGroup()) {
                                 newConversacion.setId(documentSnapshot.getId());
                                 conversaciones.add(newConversacion);
-                                adapter.notifyItemInserted(conversaciones.size()-1);
+                                adapter.notifyItemInserted(conversaciones.size() - 1);
 
-                            }else{
+                            } else {
                                 for (String participante : participantes) {
-                                if (!participante.equals(userLogged)) {
+                                    if (!participante.equals(userLogged)) {
                                         participantesRef.document(participante)
                                                 .get()
                                                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -100,7 +102,7 @@ public class ShowFragment extends Fragment {
                                                         newConversacion.setTelfUser(tlf);
                                                         conversaciones.add(newConversacion);
 
-                                                        adapter.notifyItemInserted(conversaciones.size()-1);
+                                                        adapter.notifyItemInserted(conversaciones.size() - 1);
 
                                                     }
                                                 })
@@ -114,16 +116,19 @@ public class ShowFragment extends Fragment {
                                 }
                             }
                         }
-                    }
+                        }
+
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        // Aquí manejas el fallo al obtener la conversación
                     }
                 });
 
 
-        return  view;
+        return view;
     }
+
+
+
 }
